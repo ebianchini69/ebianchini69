@@ -1,21 +1,21 @@
-# Ciao, sono Elena 👋
+# Hi, I'm Elena 👋
 
-**CPO & builder.** Dopo anni a guidare prodotto, ho deciso che la credibilità
-migliore è quella che si compila: ora costruisco in prima persona, con
-[Claude Code](https://claude.com/claude-code) come pair programmer.
+**CPO & builder.** After years leading product, I decided the best credibility
+is the kind that compiles: now I build things myself, with
+[Claude Code](https://claude.com/claude-code) as my pair programmer.
 
-## 🎁 Ora sto costruendo: [Wrapt](https://github.com/ebianchini69/wrapt)
+## 🎁 Currently building: [Wrapt](https://github.com/ebianchini69/wrapt)
 
-Un regalo che si guarda come una storia — una foto e una canzone per ogni
-momento, i ricordi, un finale che emoziona. Nato come regalo fatto a mano per
-i 18 anni di mia figlia; diventato un prodotto in beta in circa una settimana.
+A gift that unfolds like a story — one photo and one song per moment, the
+memories, a finale that gets people teary. Born as a handmade gift for my
+daughter's 18th birthday; turned into a product in beta in about a week.
 
-→ **Provalo:** https://wrapt-regalo.vercel.app
+→ **Try it:** https://wrapt-regalo.vercel.app
 
-**Come lo sto costruendo** (la parte da PM):
-- Fake-door pricing per misurare la domanda *prima* di costruire
-- Email-before-publish come segnale d'intento reale
-- Funnel tracciato end-to-end, feedback loop in-product
-- Privacy by design: storage UE, EXIF rimossi, link non indovinabili
+**How I'm building it** (the PM part):
+- Fake-door pricing to measure demand *before* building
+- Email-before-publish as the real intent signal
+- Funnel tracked end-to-end, in-product feedback loop
+- Privacy by design: EU storage, EXIF stripped, unguessable links
 
 *Test first, ship small, measure everything.* 🚀

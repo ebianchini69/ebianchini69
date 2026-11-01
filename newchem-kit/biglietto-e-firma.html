@@ -112,8 +112,8 @@ details li{margin:4px 0}
     <label for="reparto">Funzione / Reparto (facoltativo)</label><input id="reparto" placeholder="Sales">
     <label for="sede">Sede di lavoro</label><select id="sede"></select>
     <div class="row">
-      <div><label for="cell">Cellulare</label><input id="cell" type="tel" placeholder="+39 333 1234567"></div>
-      <div><label for="fisso">Telefono ufficio (facoltativo)</label><input id="fisso" type="tel" placeholder="+39 045 504900"></div>
+      <div><label for="cell">Il tuo cellulare</label><input id="cell" type="tel" placeholder="+39 333 1234567"></div>
+      <div><label for="fisso">Il tuo numero diretto (se vuoto: centralino della sede)</label><input id="fisso" type="tel" placeholder=""></div>
     </div>
     <label for="email">Email aziendale</label><input id="email" type="email" placeholder="mario.rossi@newchemspa.it">
     <label for="linkedin">Profilo LinkedIn (facoltativo)</label><input id="linkedin" placeholder="https://www.linkedin.com/in/...">
@@ -303,6 +303,7 @@ function buildSignature(){
 
 /* ---------- anteprima ---------- */
 function render(){
+  $("fisso").placeholder = sede().tel ? "Centralino: " + sede().tel : "Numero diretto";
   F.forEach(k => { try { localStorage.setItem("bv_"+k, $(k).value); } catch(e){} });
   $("cCo").innerHTML = wordmark();
   $("cNm").textContent = fullName() || "Nome Cognome";

@@ -15,7 +15,7 @@ const AZIENDA = {
   ragioneSociale: "",                          // footer legale opzionale, es. "Newchem S.p.A."
   piva:       "",                              // es. "P.IVA ..." (opzionale, da verificare con l'amministrazione)
   sito:       "https://www.newchemspa.com",    // dalla firma attuale
-  indirizzo:  { via: "Via Roveggia 47", cap: "37136", citta: "Verona", provincia: "VR", paese: "Italia" }, // DA CONFERMARE
+  indirizzo:  { via: "Via San Vittore, 39", cap: "20123", citta: "Milano", provincia: "MI", paese: "Italia" }, // come sul biglietto cartaceo (sede legale)
   centralino: "+39 045 504922",                // "Ph" nella firma attuale
   fax:        "+39 045 8201568",               // "Fax" nella firma attuale
   linkedin:   "",                              // pagina LinkedIn aziendale
@@ -59,17 +59,19 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1b1f24;color:#fff;padding:10px 16px;border-radius:9px;opacity:0;transition:.2s;pointer-events:none}
 .toast.on{opacity:1}
 /* biglietto digitale */
-.card{max-width:360px;margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;color:#1b1f24;box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.card .top{background:#fff;color:#2b2b2b;padding:22px 22px 18px;position:relative}
-.card .top::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:1px;background:var(--accent)}
-.card .co{font-size:26px;line-height:1;letter-spacing:-.01em;color:var(--brand)}
-.card .co b{font-weight:800}.card .co span{font-weight:300}
-.card .nm{font-size:22px;font-weight:700;margin-top:18px}
-.card .rl{font-size:14px;color:#6b6b6b}
-.card .body{padding:16px 22px 20px;font-size:14px}
-.card .body div{padding:5px 0;border-bottom:1px solid #eef0f2;word-break:break-word}
-.card .body div:last-child{border:0}
-.card .body b{display:inline-block;width:70px;color:#6b7580;font-weight:500}
+.cards{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+.card{position:relative;width:240px;aspect-ratio:55/85;border-radius:10px;overflow:hidden;background:#fff;color:#2b2f33;box-shadow:0 8px 28px rgba(0,0,0,.14);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.card .bigN{position:absolute;left:-6%;right:-14%;bottom:-6%;width:120%;height:auto;pointer-events:none}
+.card .co{position:relative;padding:26px 20px 0;font-size:25px;line-height:1;color:var(--brand)}
+.card .co b{font-weight:800;letter-spacing:-.01em}.card .co span{font-weight:200}
+.card .nm{position:relative;padding:22px 20px 0;font-size:15px;font-weight:700;color:#2b2f33}
+.card .rl{position:relative;padding:2px 20px 0;font-size:11.5px;color:#6b7378}
+.card .ct{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:10px;line-height:15px;color:#6b7378;padding:0 10px;word-break:break-word}
+.card .ct a{color:#6b7378;text-decoration:none}
+.card .ct .w{font-weight:700;color:#3a3f44;font-size:10.5px}
+.card.back{display:flex;align-items:center;justify-content:center}
+.card.back #qrBack img,.card.back #qrBack canvas{width:150px;height:150px}
+.cap{text-align:center;font-size:12px;color:var(--muted);margin-top:6px}
 #qr{display:flex;justify-content:center;margin:16px 0 4px}
 #qr img,#qr canvas{background:#fff;padding:10px;border-radius:10px}
 .sigbox{background:#fff;border:1px dashed var(--line);border-radius:10px;padding:18px;overflow-x:auto;margin-top:6px}
@@ -139,13 +141,25 @@ details li{margin:4px 0}
     </div>
 
     <div id="tab-card">
-      <div class="card">
-        <div class="top">
-          <div class="co" id="cCo"></div>
-          <div class="nm" id="cNm">Nome Cognome</div>
-          <div class="rl" id="cRl">Ruolo</div>
+      <div class="cards">
+        <div>
+          <div class="card">
+            <svg class="bigN" viewBox="0 0 120 100" aria-hidden="true"><g fill="#E4E7E9">
+              <polygon points="2,100 26,100 44,44 20,40"/>
+              <polygon points="20,40 44,44 82,100 58,100"/>
+              <polygon points="58,100 82,100 104,26 80,22"/>
+            </g></svg>
+            <div class="co" id="cCo"></div>
+            <div class="nm" id="cNm">Nome Cognome</div>
+            <div class="rl" id="cRl">Ruolo</div>
+            <div class="ct" id="cBody"></div>
+          </div>
+          <div class="cap">Fronte</div>
         </div>
-        <div class="body" id="cBody"></div>
+        <div>
+          <div class="card back"><div id="qrBack"></div></div>
+          <div class="cap">Retro: inquadralo per salvare il contatto</div>
+        </div>
       </div>
     </div>
 
@@ -278,16 +292,17 @@ function render(){
   $("cCo").innerHTML = wordmark();
   $("cNm").textContent = fullName() || "Nome Cognome";
   $("cRl").textContent = [val("ruolo") || "Ruolo", val("reparto")].filter(Boolean).join(" · ");
-  const rows = [];
-  if (val("cell"))  rows.push(["Cellulare", '<a href="'+telHref(val("cell"))+'">'+esc(val("cell"))+'</a>']);
+  const ln = [];
+  const a = AZIENDA.indirizzo;
+  if (a.via) ln.push(esc(a.via));
+  if (a.citta) ln.push(esc([a.cap, a.citta].filter(Boolean).join(" ") + (a.paese ? " - " + (a.paese==="Italia"?"Italy":a.paese) : "")));
+  if (val("cell")) ln.push('Mobile <a href="'+telHref(val("cell"))+'">'+esc(val("cell"))+'</a>');
   const off = val("fisso") || AZIENDA.centralino;
-  if (off) rows.push(["Ufficio", '<a href="'+telHref(off)+'">'+esc(off)+'</a>']);
-  if (AZIENDA.fax) rows.push(["Fax", esc(AZIENDA.fax)]);
-  if (val("email")) rows.push(["Email", '<a href="mailto:'+esc(val("email"))+'">'+esc(val("email"))+'</a>']);
-  if (AZIENDA.sito) rows.push(["Web", '<a href="'+esc(AZIENDA.sito)+'">'+esc(hostOf(AZIENDA.sito))+'</a>']);
-  if (addrLine()) rows.push(["Sede", esc(addrLine())]);
-  $("cBody").innerHTML = rows.map(r => '<div><b>'+r[0]+'</b>'+r[1]+'</div>').join("") || '<div class="note">Compila i campi a sinistra</div>';
-  $("cBody").querySelectorAll("a").forEach(x => x.style.color = AZIENDA.colore);
+  if (off) ln.push('Tel. <a href="'+telHref(off)+'">'+esc(off)+'</a>');
+  if (val("email")) ln.push('E-mail: <a href="mailto:'+esc(val("email"))+'">'+esc(val("email"))+'</a>');
+  if (AZIENDA.sito) ln.push('<a class="w" href="'+esc(AZIENDA.sito)+'">'+esc(hostOf(AZIENDA.sito))+'</a>');
+  $("cBody").innerHTML = ln.join("<br>");
+  drawQrBack();
   $("sig").innerHTML = buildSignature();
   if (!$("qr").classList.contains("hidden")) drawQr();
 }
@@ -316,6 +331,11 @@ function fileBase(){ return (fullName() || "contatto").replace(/[^\w\- ]+/g,"").
 
 $("btnVcf").onclick = () => download(fileBase()+".vcf", buildVcard(true), "text/vcard;charset=utf-8");
 
+function drawQrBack(){
+  const el = $("qrBack"); if (!el) return; el.innerHTML = "";
+  if (typeof QRCode === "undefined") return;
+  new QRCode(el, { text: unescape(encodeURIComponent(buildVcard(false))), width: 300, height: 300, colorDark: AZIENDA.colore, correctLevel: QRCode.CorrectLevel.M });
+}
 function drawQr(){
   $("qr").innerHTML = "";
   if (typeof QRCode === "undefined") { $("qr").textContent = "QR non disponibile offline."; return; }

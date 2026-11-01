@@ -20,8 +20,8 @@ const AZIENDA = {
   fax:        "+39 045 8201568",               // "Fax" nella firma attuale
   linkedin:   "",                              // pagina LinkedIn aziendale
   logoUrl:    "",                              // URL PUBBLICO del logo (PNG, ~300px largo). Vuoto = logo testuale
-  colore:     "#4D4D4D",                       // grigio scuro neutro: provvisorio, da allineare al biglietto cartaceo
-  coloreAccento: "#BDBDBD",                    // grigio chiaro per la riga verticale: provvisorio
+  colore:     "#5A6770",                       // grigio ardesia del logo e del sito newchemspa.com
+  coloreAccento: "#5A6770",                    // stessa tinta per la riga verticale
   font:       "Arial, Helvetica, sans-serif",  // font sicuro per Outlook
   disclaimer: "" // es. testo privacy/riservatezza; vuoto = nessuno
 };
@@ -29,7 +29,7 @@ const AZIENDA = {
 <style>
 :root{
   --bg:#f4f5f7; --panel:#ffffff; --ink:#1b1f24; --muted:#5d6670; --line:#dde1e6;
-  --brand:#4D4D4D; --accent:#BDBDBD; --field:#ffffff;
+  --brand:#5A6770; --accent:#5A6770; --field:#ffffff;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -62,8 +62,9 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line
 .card{max-width:360px;margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;color:#1b1f24;box-shadow:0 8px 30px rgba(0,0,0,.12)}
 .card .top{background:#fff;color:#2b2b2b;padding:22px 22px 18px;position:relative}
 .card .top::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:1px;background:var(--accent)}
-.card .co{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7a7a7a}
-.card .nm{font-size:22px;font-weight:700;margin-top:10px}
+.card .co{font-size:26px;line-height:1;letter-spacing:-.01em;color:var(--brand)}
+.card .co b{font-weight:800}.card .co span{font-weight:300}
+.card .nm{font-size:22px;font-weight:700;margin-top:18px}
 .card .rl{font-size:14px;color:#6b6b6b}
 .card .body{padding:16px 22px 20px;font-size:14px}
 .card .body div{padding:5px 0;border-bottom:1px solid #eef0f2;word-break:break-word}
@@ -199,6 +200,7 @@ function addrLine(){
   const a = AZIENDA.indirizzo;
   return [a.via, [a.cap, a.citta, a.provincia ? "("+a.provincia+")" : ""].filter(Boolean).join(" ")].filter(Boolean).join(", ");
 }
+function wordmark(){ return '<b>NEW</b><span>CHEM</span>'; } // logo testuale come sul sito
 function hostOf(u){ return u.replace(/^https?:\/\//,"").replace(/\/$/,""); }
 
 /* ---------- vCard 3.0 (compatibile iOS e Android) ---------- */
@@ -246,7 +248,7 @@ function buildSignature(){
 
   const logo = AZIENDA.logoUrl
     ? '<img src="'+esc(AZIENDA.logoUrl)+'" alt="'+esc(AZIENDA.nome)+'" width="140" style="display:block;width:140px;height:auto;border:0;">'
-    : '<span style="font-family:'+f+';font-size:20px;font-weight:bold;color:'+c+';letter-spacing:1px;">'+esc(AZIENDA.nome)+'</span>';
+    : '<span style="font-family:'+f+';font-size:22px;line-height:24px;color:'+c+';"><b style="font-weight:bold;">NEW</b><span style="font-weight:normal;">CHEM</span></span>';
 
   const social = [];
   if (val("linkedin")) social.push('<a href="'+esc(val("linkedin"))+'" style="'+a+'">LinkedIn</a>');
@@ -273,7 +275,7 @@ function buildSignature(){
 /* ---------- anteprima ---------- */
 function render(){
   F.forEach(k => { try { localStorage.setItem("bv_"+k, $(k).value); } catch(e){} });
-  $("cCo").textContent = AZIENDA.nome;
+  $("cCo").innerHTML = wordmark();
   $("cNm").textContent = fullName() || "Nome Cognome";
   $("cRl").textContent = [val("ruolo") || "Ruolo", val("reparto")].filter(Boolean).join(" · ");
   const rows = [];

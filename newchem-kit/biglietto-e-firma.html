@@ -11,12 +11,13 @@
    Sostituire colori, logo e dati con quelli ufficiali del sito Newcam.
    ===================================================================== */
 const AZIENDA = {
-  nome:       "New CAM",                      // ragione sociale come appare in firma
-  ragioneSociale: "",                          // es. "New CAM S.r.l." (per il footer legale, opzionale)
-  piva:       "",                              // es. "P.IVA 01234567890" (opzionale)
-  sito:       "https://www.newcam.it",         // DA VERIFICARE
-  indirizzo:  { via: "", cap: "", citta: "", provincia: "", paese: "Italia" },
-  centralino: "",                              // es. "+39 02 1234567"
+  nome:       "Newchem SpA",                  // come appare in firma (dalla firma attuale dei colleghi)
+  ragioneSociale: "",                          // footer legale opzionale, es. "Newchem S.p.A."
+  piva:       "",                              // es. "P.IVA ..." (opzionale, da verificare con l'amministrazione)
+  sito:       "https://www.newchemspa.com",    // dalla firma attuale
+  indirizzo:  { via: "Via Roveggia 47", cap: "37136", citta: "Verona", provincia: "VR", paese: "Italia" }, // DA CONFERMARE
+  centralino: "+39 045 504922",                // "Ph" nella firma attuale
+  fax:        "+39 045 8201568",               // "Fax" nella firma attuale
   linkedin:   "",                              // pagina LinkedIn aziendale
   logoUrl:    "",                              // URL PUBBLICO del logo (PNG, ~300px largo). Vuoto = logo testuale
   colore:     "#0B4A8B",                       // colore primario (DA SOSTITUIRE con quello Newcam)
@@ -99,9 +100,9 @@ details li{margin:4px 0}
     <label for="reparto">Funzione / Reparto (facoltativo)</label><input id="reparto" placeholder="Sales">
     <div class="row">
       <div><label for="cell">Cellulare</label><input id="cell" type="tel" placeholder="+39 333 1234567"></div>
-      <div><label for="fisso">Telefono ufficio (facoltativo)</label><input id="fisso" type="tel" placeholder="+39 02 1234567"></div>
+      <div><label for="fisso">Telefono ufficio (facoltativo)</label><input id="fisso" type="tel" placeholder="+39 045 504900"></div>
     </div>
-    <label for="email">Email aziendale</label><input id="email" type="email" placeholder="mario.rossi@newcam.it">
+    <label for="email">Email aziendale</label><input id="email" type="email" placeholder="mario.rossi@newchemspa.it">
     <label for="linkedin">Profilo LinkedIn (facoltativo)</label><input id="linkedin" placeholder="https://www.linkedin.com/in/...">
     <label for="foto">Foto per il contatto (facoltativa, resta solo nel file .vcf)</label><input id="foto" type="file" accept="image/*">
 
@@ -218,6 +219,7 @@ function buildVcard(withPhoto){
   if (val("cell"))  L.push("TEL;TYPE=CELL,VOICE:" + val("cell"));
   if (val("fisso")) L.push("TEL;TYPE=WORK,VOICE:" + val("fisso"));
   else if (AZIENDA.centralino) L.push("TEL;TYPE=WORK,VOICE:" + AZIENDA.centralino);
+  if (AZIENDA.fax) L.push("TEL;TYPE=WORK,FAX:" + AZIENDA.fax);
   if (val("email")) L.push("EMAIL;TYPE=INTERNET,WORK:" + val("email"));
   if (AZIENDA.sito) L.push("URL;TYPE=WORK:" + AZIENDA.sito);
   if (val("linkedin")) L.push("X-SOCIALPROFILE;TYPE=linkedin:" + val("linkedin"));
@@ -233,11 +235,14 @@ function buildSignature(){
   const t = "font-family:"+f+";font-size:12px;line-height:18px;color:#444444;";
   const a = "color:"+c+";text-decoration:none;";
   const lines = [];
-  if (val("cell"))  lines.push('<span style="color:'+c+';font-weight:bold;">M</span>&nbsp; <a href="'+telHref(val("cell"))+'" style="'+a+'color:#444444;">'+esc(val("cell"))+'</a>');
+  const lab = x => '<span style="color:'+c+';font-weight:bold;">'+x+'</span>&nbsp; ';
+  const tel = n => '<a href="'+telHref(n)+'" style="'+a+'color:#444444;">'+esc(n)+'</a>';
   const off = val("fisso") || AZIENDA.centralino;
-  if (off) lines.push('<span style="color:'+c+';font-weight:bold;">T</span>&nbsp; <a href="'+telHref(off)+'" style="'+a+'color:#444444;">'+esc(off)+'</a>');
-  if (val("email")) lines.push('<span style="color:'+c+';font-weight:bold;">E</span>&nbsp; <a href="mailto:'+esc(val("email"))+'" style="'+a+'color:#444444;">'+esc(val("email"))+'</a>');
-  if (AZIENDA.sito) lines.push('<span style="color:'+c+';font-weight:bold;">W</span>&nbsp; <a href="'+esc(AZIENDA.sito)+'" style="'+a+'">'+esc(hostOf(AZIENDA.sito))+'</a>');
+  if (off) lines.push(lab("Ph:") + tel(off));
+  if (AZIENDA.fax) lines.push(lab("Fax:") + esc(AZIENDA.fax));
+  if (val("cell")) lines.push(lab("Mobile:") + tel(val("cell")));
+  if (val("email")) lines.push('<a href="mailto:'+esc(val("email"))+'" style="'+a+'color:#444444;">'+esc(val("email"))+'</a>');
+  if (AZIENDA.sito) lines.push('<a href="'+esc(AZIENDA.sito)+'" style="'+a+'">'+esc(hostOf(AZIENDA.sito))+'</a>');
 
   const logo = AZIENDA.logoUrl
     ? '<img src="'+esc(AZIENDA.logoUrl)+'" alt="'+esc(AZIENDA.nome)+'" width="140" style="display:block;width:140px;height:auto;border:0;">'
@@ -275,6 +280,7 @@ function render(){
   if (val("cell"))  rows.push(["Cellulare", '<a href="'+telHref(val("cell"))+'">'+esc(val("cell"))+'</a>']);
   const off = val("fisso") || AZIENDA.centralino;
   if (off) rows.push(["Ufficio", '<a href="'+telHref(off)+'">'+esc(off)+'</a>']);
+  if (AZIENDA.fax) rows.push(["Fax", esc(AZIENDA.fax)]);
   if (val("email")) rows.push(["Email", '<a href="mailto:'+esc(val("email"))+'">'+esc(val("email"))+'</a>']);
   if (AZIENDA.sito) rows.push(["Web", '<a href="'+esc(AZIENDA.sito)+'">'+esc(hostOf(AZIENDA.sito))+'</a>']);
   if (addrLine()) rows.push(["Sede", esc(addrLine())]);

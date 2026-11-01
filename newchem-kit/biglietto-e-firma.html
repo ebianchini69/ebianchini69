@@ -20,8 +20,8 @@ const AZIENDA = {
   fax:        "+39 045 8201568",               // "Fax" nella firma attuale
   linkedin:   "",                              // pagina LinkedIn aziendale
   logoUrl:    "",                              // URL PUBBLICO del logo (PNG, ~300px largo). Vuoto = logo testuale
-  colore:     "#0B4A8B",                       // colore primario (DA SOSTITUIRE con quello Newcam)
-  coloreAccento: "#F39200",                    // colore secondario (DA SOSTITUIRE)
+  colore:     "#4D4D4D",                       // grigio scuro neutro: provvisorio, da allineare al biglietto cartaceo
+  coloreAccento: "#BDBDBD",                    // grigio chiaro per la riga verticale: provvisorio
   font:       "Arial, Helvetica, sans-serif",  // font sicuro per Outlook
   disclaimer: "" // es. testo privacy/riservatezza; vuoto = nessuno
 };
@@ -29,7 +29,7 @@ const AZIENDA = {
 <style>
 :root{
   --bg:#f4f5f7; --panel:#ffffff; --ink:#1b1f24; --muted:#5d6670; --line:#dde1e6;
-  --brand:#0B4A8B; --accent:#F39200; --field:#ffffff;
+  --brand:#4D4D4D; --accent:#BDBDBD; --field:#ffffff;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -60,11 +60,11 @@ button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line
 .toast.on{opacity:1}
 /* biglietto digitale */
 .card{max-width:360px;margin:0 auto;border-radius:18px;overflow:hidden;background:#fff;color:#1b1f24;box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.card .top{background:var(--brand);color:#fff;padding:22px 22px 18px;position:relative}
-.card .top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--accent)}
-.card .co{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.card .top{background:#fff;color:#2b2b2b;padding:22px 22px 18px;position:relative}
+.card .top::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:1px;background:var(--accent)}
+.card .co{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7a7a7a}
 .card .nm{font-size:22px;font-weight:700;margin-top:10px}
-.card .rl{font-size:14px;opacity:.9}
+.card .rl{font-size:14px;color:#6b6b6b}
 .card .body{padding:16px 22px 20px;font-size:14px}
 .card .body div{padding:5px 0;border-bottom:1px solid #eef0f2;word-break:break-word}
 .card .body div:last-child{border:0}

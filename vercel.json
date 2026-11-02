@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/", "destination": "/newchem-kit/biglietto-e-firma.html" }
-  ]
-}

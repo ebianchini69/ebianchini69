@@ -38,3 +38,15 @@ I report giornalieri sono in `~/claude-trading/reports/`; ogni sera arriva anche
 ## Da sapere
 - **Tasse:** Alpaca è un broker estero, quindi il regime è dichiarativo. Plusvalenze e quadro RW vanno nella dichiarazione dei redditi.
 - **Accesso dall'Italia:** l'apertura del conto reale per i residenti italiani va confermata in fase di registrazione. Se Alpaca non accetta il paese, il piano B è Interactive Brokers: richiede 2FA quotidiano e un adattatore del bot.
+
+# Lotteria dichiarata (`lotteria.py`), attiva da domani
+**Una sola giocata da 100 €:** un'opzione call USA con scadenza tra 20 e 45 giorni, su uno di questi titoli: QQQ, SPY, NVDA, TSLA, AAPL, AMD, META, MSFT, AMZN, AVGO.
+- **Scelta:** il programma prende l'opzione con la probabilità stimata più alta di arrivare a 5 volte il prezzo pagato, in base alla volatilità implicita.
+- **Uscita:** vende appena la posizione vale 5 volte, oppure vende il residuo il giorno prima della scadenza.
+- **Limiti nel codice:** spesa massima pari al budget, solo acquisti, nessuna seconda giocata senza il comando `nuova`.
+- **Attese:** la probabilità tipica di vincita è del 10–20%. Il valore atteso è negativo e l'esito più probabile è perdere i 100 €.
+
+Installazione: `bash setup_mac.sh paper lotteria` (in seguito `live`).
+Test: `python3 test_lotteria.py`.
+
+Le opzioni sul conto *reale* di Alpaca per i residenti UE vanno confermate in fase di apertura. In alternativa c'è Interactive Brokers: per una sola giocata, la conferma 2FA quotidiana non è un problema.

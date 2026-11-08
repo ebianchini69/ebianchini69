@@ -98,12 +98,17 @@ def session_panel(data, tickers, day, start, end):
     return P
 
 
-def run_session(P, capital, warmup, stop, half_spread, pick="momentum", rng=None):
+def run_session(P, capital, warmup, stop, half_spread, pick="momentum", rng=None, tp=TP, day_start=None, day_target=None, day_stop=None):
     c, h, l, g = P["c"], P["h"], P["l"], P["growth"]
     n = len(c)
     i = warmup
     trades = []
+    day_start = day_start or capital
     while i < n - 2:
+        if day_target and capital >= day_start * (1 + day_target):
+            break  # obiettivo del giorno raggiunto: si va a casa
+        if day_stop and capital <= day_start * (1 - day_stop):
+            break  # perdita massima del giorno raggiunta
         row = g[i]
         valid = np.where(~np.isnan(row))[0]
         if not len(valid):
@@ -111,14 +116,14 @@ def run_session(P, capital, warmup, stop, half_spread, pick="momentum", rng=None
             continue
         t = valid[np.argmax(row[valid])] if pick == "momentum" else rng.choice(list(valid))
         entry = c[i, t] * (1 + half_spread)
-        tp, sl = entry * (1 + TP), entry * (1 - stop) if stop else None
+        tp_px, sl = entry * (1 + tp), entry * (1 - stop) if stop else None
         exit_px, j = None, i + 1
         while j < n - 1:
             if sl is not None and l[j, t] <= sl:
                 exit_px = sl * (1 - half_spread)
                 break
-            if h[j, t] >= tp:
-                exit_px = tp
+            if h[j, t] >= tp_px:
+                exit_px = tp_px
                 break
             j += 1
         if exit_px is None:  # fine sessione: si chiude a mercato
@@ -143,9 +148,9 @@ def panels(data, days):
     return PANELS
 
 
-def simulate(data, days, warmup, stop, markets, pick="momentum", seed=0):
+def simulate(data, days, warmup, stop, markets, pick="momentum", seed=0, tp=TP, day_target=None, day_stop=None, pn=None):
     rng = random.Random(seed)
-    pn = panels(data, days)
+    pn = pn or panels(data, days)
     cap, daily, all_trades = 100.0, [], []
     for day in days:
         start_cap = cap
@@ -153,7 +158,7 @@ def simulate(data, days, warmup, stop, markets, pick="momentum", seed=0):
             P = pn[(day, m)]
             if m not in markets or P is None:
                 continue
-            cap, tr = run_session(P, cap, warmup, stop, SPREAD[m], pick, rng)
+            cap, tr = run_session(P, cap, warmup, stop, SPREAD[m], pick, rng, tp, start_cap, day_target, day_stop)
             all_trades += tr
         daily.append(cap / start_cap - 1)
     d = np.array(daily)
@@ -164,6 +169,7 @@ def simulate(data, days, warmup, stop, markets, pick="momentum", seed=0):
         "Media giorno": f"{d.mean():+.2%}",
         "Giorni >= +10%": int((d >= 0.10).sum()),
         "Giorni in perdita": int((d < 0).sum()),
+        "Giorni >= +1%": int((d >= 0.01).sum()),
         "Giorno migliore": f"{d.max():+.1%}",
         "Giorno peggiore": f"{d.min():+.1%}",
         "Operazioni/giorno": round(len(tr) / max(len(d), 1), 1),

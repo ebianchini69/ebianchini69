@@ -50,7 +50,7 @@ module.exports = {
           testo:
             "Al ristorante L'Orologio, in centro a Milano, un gruppo di soci in dissenso con il Milan fonda una nuova squadra. Il nome è una dichiarazione d'intenti: Internazionale, aperta ai giocatori stranieri. I colori sono il nero e l'azzurro.",
           tabellino: "Milano, ristorante L'Orologio",
-          giornale: "La Gazzetta dello Sport, marzo 1908",
+          giornale: "Il documento di fondazione firmato dai soci, Milano, 9 marzo 1908",
         },
         {
           id: "1910-primo-scudetto",
@@ -59,17 +59,16 @@ module.exports = {
           testo:
             "Lo spareggio con la Pro Vercelli finisce 10-3. I piemontesi, in polemica con la data fissata, schierano i ragazzi delle giovanili. L'Inter è campione d'Italia per la prima volta.",
           tabellino: "Inter – Pro Vercelli 10-3 · spareggio scudetto",
-          giornale: "La Gazzetta dello Sport, 25 aprile 1910",
+          giornale: "La Gazzetta dello Sport, 25 aprile 1910 (collage d'epoca)",
         },
         {
           id: "1920-secondo-scudetto",
-          data: "Giugno 1920",
+          data: "20 giugno 1920",
           titolo: "Il secondo titolo dopo la Grande Guerra",
           testo:
             "Il calcio riparte dopo il conflitto e l'Inter torna sul tetto d'Italia battendo il Livorno nella finale del campionato.",
-          tabellino: "Finale: Inter – Livorno 3-2",
-          giornale: "La Gazzetta dello Sport, giugno 1920",
-          verificare: true,
+          tabellino: "Finale a Bologna: Inter – Livorno 3-2",
+          giornale: "La Gazzetta dello Sport, 21 giugno 1920",
         },
       ],
     },
@@ -82,32 +81,30 @@ module.exports = {
       momenti: [
         {
           id: "1930-scudetto-meazza",
-          data: "Stagione 1929/30",
+          data: "29 giugno 1930",
           titolo: "Il primo campionato a girone unico è nerazzurro",
           testo:
             "Nasce la Serie A come la conosciamo e la vince l'Ambrosiana. Giuseppe Meazza, vent'anni appena, è capocannoniere con 31 gol: il ragazzo di Porta Vittoria diventa il simbolo di Milano.",
-          tabellino: "Capocannoniere: Giuseppe Meazza, 31 gol",
-          giornale: "La Gazzetta dello Sport, estate 1930",
+          tabellino: "Ambrosiana – Juventus 2-0 · Meazza capocannoniere con 31 gol",
+          giornale: "La Gazzetta dello Sport, 30 giugno 1930",
         },
         {
           id: "1938-scudetto",
-          data: "Stagione 1937/38",
+          data: "24 aprile 1938",
           titolo: "Ambrosiana-Inter, di nuovo campione",
           testo:
             "Sotto il nome di Ambrosiana-Inter arriva il quarto scudetto. Meazza è ancora il capocannoniere del campionato.",
-          tabellino: "Quarto scudetto",
-          giornale: "La Gazzetta dello Sport, primavera 1938",
-          verificare: true,
+          tabellino: "Bari – Ambrosiana-Inter 0-2 · Meazza, Frossi",
+          giornale: "La Gazzetta dello Sport, 25 aprile 1938",
         },
         {
           id: "1940-scudetto",
-          data: "Stagione 1939/40",
+          data: "2 giugno 1940",
           titolo: "Il quinto scudetto alla vigilia della guerra",
           testo:
             "L'ultimo titolo prima che il conflitto fermi tutto. Pochi anni dopo, nel 1945, la squadra riprenderà il suo nome: Internazionale.",
-          tabellino: "Quinto scudetto",
-          giornale: "La Gazzetta dello Sport, primavera 1940",
-          verificare: true,
+          tabellino: "Ambrosiana-Inter – Bologna 1-0",
+          giornale: "La Gazzetta dello Sport, 3 giugno 1940",
         },
       ],
     },
@@ -120,21 +117,19 @@ module.exports = {
       momenti: [
         {
           id: "1953-scudetto",
-          data: "Stagione 1952/53",
+          data: "3 maggio 1953",
           titolo: "Lo scudetto di Foni",
-          testo:
-            "Alfredo Foni costruisce una squadra solida e prudente, con l'estro di Nyers, Skoglund e Lorenzi davanti. È il sesto titolo.",
-          tabellino: "Allenatore: Alfredo Foni",
-          giornale: "La Gazzetta dello Sport, primavera 1953",
+          testo: "La Roma batte la Juventus 3-0 e chiude il discorso: lo scudetto è dell'Inter di Alfredo Foni, con l'estro di Nyers, Skoglund e Lorenzi davanti. È il sesto titolo.",
+          tabellino: "Roma – Juventus 3-0 · titolo matematico",
+          giornale: "l'Unità del lunedì, 4 maggio 1953, pagina sportiva",
         },
         {
           id: "1954-scudetto",
-          data: "Stagione 1953/54",
+          data: "30 maggio 1954",
           titolo: "Il bis",
-          testo:
-            "Un anno dopo, l'Inter si conferma campione d'Italia. Due scudetti di fila: la base da cui partirà la stagione più gloriosa.",
-          tabellino: "Settimo scudetto",
-          giornale: "La Gazzetta dello Sport, primavera 1954",
+          testo: "All'ultima giornata l'Inter batte la Triestina e resiste alla Juventus: il pubblico di San Siro porta in trionfo i campioni. Foni è il primo allenatore nerazzurro a vincere due scudetti.",
+          tabellino: "Inter – Triestina 4-2 · settimo scudetto",
+          giornale: "l'Unità del lunedì, 31 maggio 1954, pagina sportiva",
         },
       ],
     },
@@ -147,12 +142,11 @@ module.exports = {
       momenti: [
         {
           id: "1963-scudetto",
-          data: "Stagione 1962/63",
+          data: "5 maggio 1963",
           titolo: "Il Mago vince il primo scudetto",
-          testo:
-            "Dopo tre stagioni di costruzione, la squadra di Herrera conquista l'ottavo titolo. È solo l'inizio.",
-          tabellino: "Allenatore: Helenio Herrera",
-          giornale: "La Gazzetta dello Sport, primavera 1963",
+          testo: "Paradosso da raccontare: l'Inter perde 3-0 all'Olimpico, ma i risultati delle rivali le consegnano lo scudetto con tre giornate d'anticipo. È l'ottavo titolo, il primo di Helenio Herrera.",
+          tabellino: "Roma – Inter 3-0 · ma lo scudetto è nerazzurro",
+          giornale: "l'Unità sport, 6 maggio 1963, prima pagina",
         },
         {
           id: "1964-coppa-campioni",
@@ -161,16 +155,16 @@ module.exports = {
           testo:
             "Al Prater l'avversario è il Real Madrid di Di Stéfano e Puskás. Finisce 3-1 con la doppietta di Sandro Mazzola e il gol di Milani. È la prima Coppa dei Campioni dell'Inter.",
           tabellino: "Inter – Real Madrid 3-1 · Mazzola 2, Milani",
-          giornale: "La Gazzetta dello Sport, 28 maggio 1964",
+          giornale: "l'Unità, 28 maggio 1964, pagina sportiva",
         },
         {
           id: "1964-intercontinentale",
-          data: "Settembre 1964",
+          data: "26 settembre 1964",
           titolo: "Campioni del mondo",
           testo:
             "Contro l'Independiente serve lo spareggio, a Madrid. Lo decide Mario Corso ai supplementari: l'Inter è campione del mondo per club.",
           tabellino: "Spareggio: Inter – Independiente 1-0 d.t.s. · Corso",
-          giornale: "La Gazzetta dello Sport, settembre 1964",
+          giornale: "l'Unità, 27 settembre 1964, pagina sportiva",
         },
         {
           id: "1965-coppa-campioni",
@@ -179,25 +173,24 @@ module.exports = {
           testo:
             "La finale si gioca in casa, su un campo pesante. Contro il Benfica di Eusébio basta un tiro di Jair. Seconda Coppa dei Campioni consecutiva.",
           tabellino: "Inter – Benfica 1-0 · Jair",
-          giornale: "La Gazzetta dello Sport, 28 maggio 1965",
+          giornale: "l'Unità, 28 maggio 1965, pagina sportiva",
         },
         {
           id: "1965-intercontinentale",
-          data: "Settembre 1965",
+          data: "8 settembre 1965",
           titolo: "Ancora sul tetto del mondo",
-          testo:
-            "Di nuovo l'Independiente, di nuovo l'Inter. Il 3-0 di San Siro e il pareggio in Argentina valgono la seconda Coppa Intercontinentale.",
+          testo: "Di nuovo l'Independiente, di nuovo l'Inter: a San Siro finisce 3-0, con Peiró e la doppietta di Mazzola. Il pareggio in Argentina una settimana dopo vale la seconda Coppa Intercontinentale.",
           tabellino: "Inter – Independiente 3-0 · 0-0",
-          giornale: "La Gazzetta dello Sport, settembre 1965",
+          giornale: "l'Unità, 9 settembre 1965, pagina sportiva",
         },
         {
           id: "1966-prima-stella",
-          data: "Stagione 1965/66",
+          data: "15 maggio 1966",
           titolo: "Dieci scudetti: la prima stella",
           testo:
             "Il decimo titolo vale la stella d'oro sulla maglia. La Grande Inter chiude il suo ciclo da leggenda.",
-          tabellino: "Decimo scudetto · prima stella",
-          giornale: "La Gazzetta dello Sport, primavera 1966",
+          tabellino: "Inter – Lazio 4-1 · decimo scudetto, prima stella",
+          giornale: "l'Unità sport, 16 maggio 1966",
         },
       ],
     },
@@ -210,48 +203,48 @@ module.exports = {
       momenti: [
         {
           id: "1971-scudetto",
-          data: "Stagione 1970/71",
+          data: "2 maggio 1971",
           titolo: "La rimonta di Invernizzi",
           testo:
             "Partita male, la squadra cambia allenatore e con Giovanni Invernizzi rimonta fino allo scudetto, superando il Milan. Boninsegna è il capocannoniere.",
-          tabellino: "Undicesimo scudetto · Boninsegna capocannoniere",
-          giornale: "La Gazzetta dello Sport, primavera 1971",
+          tabellino: "Inter – Foggia 5-0 · undicesimo scudetto",
+          giornale: "l'Unità, 3 maggio 1971, pagina sportiva",
         },
         {
           id: "1980-scudetto",
-          data: "Stagione 1979/80",
+          data: "27 aprile 1980",
           titolo: "Lo scudetto di Bersellini",
           testo:
             "Una squadra giovane, con Altobelli e Beccalossi, vince il dodicesimo titolo.",
-          tabellino: "Allenatore: Eugenio Bersellini",
-          giornale: "La Gazzetta dello Sport, primavera 1980",
+          tabellino: "Inter – Roma 2-2 · dodicesimo scudetto",
+          giornale: "l'Unità, 28 aprile 1980, pagina sportiva",
         },
         {
           id: "1989-scudetto-record",
-          data: "Stagione 1988/89",
+          data: "28 maggio 1989",
           titolo: "Lo scudetto dei record",
           testo:
             "L'Inter di Trapattoni, con i tedeschi Matthäus e Brehme, chiude a 58 punti: il record dell'epoca dei due punti a vittoria. Serena è capocannoniere.",
-          tabellino: "58 punti · Allenatore: Giovanni Trapattoni",
-          giornale: "La Gazzetta dello Sport, maggio 1989",
+          tabellino: "Inter – Napoli 2-1 · 58 punti a fine stagione",
+          giornale: "l'Unità, 29 maggio 1989, pagina sportiva",
         },
         {
           id: "1991-coppa-uefa",
-          data: "Maggio 1991",
+          data: "22 maggio 1991",
           titolo: "La prima Coppa UEFA",
           testo:
             "La finale è tutta italiana contro la Roma. Il 2-0 di San Siro basta: la sconfitta per 1-0 all'Olimpico non cambia nulla.",
           tabellino: "Inter – Roma 2-0 · 0-1",
-          giornale: "La Gazzetta dello Sport, maggio 1991",
+          giornale: "l'Unità, 23 maggio 1991, pagina sportiva",
         },
         {
           id: "1994-coppa-uefa",
-          data: "Maggio 1994",
+          data: "11 maggio 1994",
           titolo: "La seconda Coppa UEFA",
           testo:
             "In una stagione difficile in campionato, l'Inter vince in Europa: doppio 1-0 al Casino Salisburgo.",
           tabellino: "Casino Salisburgo – Inter 0-1 · Inter – Casino Salisburgo 1-0",
-          giornale: "La Gazzetta dello Sport, maggio 1994",
+          giornale: "l'Unità, 12 maggio 1994, pagina sportiva",
         },
       ],
     },
@@ -264,12 +257,12 @@ module.exports = {
       momenti: [
         {
           id: "1997-ronaldo",
-          data: "Estate 1997",
+          data: "25 luglio 1997",
           titolo: "Arriva il Fenomeno",
           testo:
             "Massimo Moratti porta a Milano Ronaldo, il giocatore più forte del mondo. San Siro non aveva mai visto niente di simile.",
           tabellino: "Ronaldo Luís Nazário de Lima",
-          giornale: "La Gazzetta dello Sport, estate 1997",
+          giornale: "l'Unità, 26 luglio 1997, pagina sportiva",
         },
         {
           id: "1998-coppa-uefa",
@@ -278,7 +271,7 @@ module.exports = {
           testo:
             "Al Parco dei Principi la finale contro la Lazio finisce 3-0: segnano Zamorano, Zanetti e Ronaldo. Terza Coppa UEFA.",
           tabellino: "Inter – Lazio 3-0 · Zamorano, Zanetti, Ronaldo",
-          giornale: "La Gazzetta dello Sport, 7 maggio 1998",
+          giornale: "l'Unità, 7 maggio 1998, pagina sportiva",
         },
       ],
     },
@@ -291,12 +284,12 @@ module.exports = {
       momenti: [
         {
           id: "2007-scudetto-record",
-          data: "Stagione 2006/07",
+          data: "22 aprile 2007",
           titolo: "97 punti",
           testo:
             "L'Inter di Roberto Mancini domina il campionato: 17 vittorie consecutive e 97 punti, il record del campionato italiano di allora.",
-          tabellino: "Allenatore: Roberto Mancini",
-          giornale: "La Gazzetta dello Sport, aprile 2007",
+          tabellino: "Siena – Inter 1-2 · Materazzi 2 · 97 punti a fine stagione",
+          giornale: "l'Unità, 23 aprile 2007, pagina sportiva",
         },
         {
           id: "2008-parma",
@@ -305,16 +298,16 @@ module.exports = {
           testo:
             "All'ultima giornata, con la Roma a un passo, entra Ibrahimović e segna due gol sotto il diluvio. Scudetto.",
           tabellino: "Parma – Inter 0-2 · Ibrahimović 2",
-          giornale: "La Gazzetta dello Sport, 19 maggio 2008",
+          giornale: "l'Unità, 19 maggio 2008, pagina sportiva",
         },
         {
           id: "2009-scudetto-mourinho",
-          data: "Stagione 2008/09",
+          data: "16 maggio 2009",
           titolo: "Il primo scudetto di Mourinho",
           testo:
             "Il primo anno dello Special One finisce con il quarto titolo di fila. Ma l'anno dopo sarà un'altra storia.",
           tabellino: "Allenatore: José Mourinho",
-          giornale: "La Gazzetta dello Sport, maggio 2009",
+          giornale: "La Gazzetta dello Sport, 17 maggio 2009",
         },
         {
           id: "2010-coppa-italia",
@@ -391,14 +384,22 @@ module.exports = {
           grande: true,
         },
         {
-          id: "2026-stagione-recente",
-          data: "Stagione 2025/26",
-          titolo: "[Da completare: l'ultima stagione]",
+          id: "2026-scudetto",
+          data: "3 maggio 2026",
+          titolo: "Ventuno di gloria",
           testo:
-            "[Scrivi qui il momento più recente da ricordare: una vittoria, una partita vista insieme, un gol.]",
-          tabellino: "",
-          giornale: "[Giornale e data]",
-          verificare: true,
+            "Al primo anno da allenatore dell'Inter, Cristian Chivu, uno degli eroi del Triplete, vince lo scudetto con tre giornate d'anticipo battendo il Parma a San Siro. È il ventunesimo titolo.",
+          tabellino: "Inter – Parma 2-0 · ventunesimo scudetto",
+          giornale: "La Gazzetta dello Sport, 4 maggio 2026",
+        },
+        {
+          id: "2026-coppa-italia",
+          data: "13 maggio 2026",
+          titolo: "E sono due",
+          testo:
+            "Dieci giorni dopo lo scudetto, all'Olimpico arriva anche la Coppa Italia, la decima della storia nerazzurra. È il double.",
+          tabellino: "Lazio – Inter 0-2 · decima Coppa Italia",
+          giornale: "La Gazzetta dello Sport, 14 maggio 2026",
         },
       ],
     },

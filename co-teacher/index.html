@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ada · co-teacher vocale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --ink:#eef0f4; --mute:#9aa3b2; --accent:#7c9cff; --accent2:#4fd1c5;
+    --warn:#ffb454; --hot:#ff6b8b; --ok:#5ee38f; --r:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+  button,input,textarea,select{font:inherit;color:inherit}
+  header{display:flex;align-items:center;gap:14px;padding:14px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(15,17,21,.92);backdrop-filter:blur(8px);z-index:5}
+  header h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.2px}
+  header .sub{color:var(--mute);font-size:13px}
+  header .sp{flex:1}
+  .pill{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+  .pill.ok{color:var(--ok);border-color:#2f5a40}
+  .pill.bad{color:var(--hot);border-color:#5a2f3a}
+  .tabs{display:flex;gap:6px}
+  .tab{background:none;border:1px solid transparent;color:var(--mute);padding:6px 12px;border-radius:10px;cursor:pointer}
+  .tab.on{background:var(--panel2);border-color:var(--line);color:var(--ink)}
+  main{max-width:1280px;margin:0 auto;padding:20px}
+  .view{display:none}.view.on{display:block}
+  .grid{display:grid;grid-template-columns:1.35fr 1fr;gap:18px}
+  @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--mute);margin:0 0 12px;font-weight:600}
+  label{display:block;font-size:13px;color:var(--mute);margin:12px 0 6px}
+  input[type=text],input[type=password],textarea,select{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+  textarea{min-height:90px;resize:vertical}
+  input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .row>*{flex:1}
+  .btn{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer;white-space:nowrap}
+  .btn:hover{border-color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#0b0d12;font-weight:600}
+  .btn.warn{border-color:var(--warn);color:var(--warn)}
+  .btn.small{padding:5px 10px;font-size:13px}
+  .hint{color:var(--mute);font-size:12.5px;margin-top:6px}
+  /* stage */
+  .stage{display:flex;flex-direction:column;align-items:center;gap:16px;padding:26px 18px}
+  .orb{width:170px;height:170px;border-radius:50%;position:relative;cursor:pointer;
+       background:radial-gradient(circle at 35% 30%,#a9bcff,#5b78e8 45%,#26306b 80%);box-shadow:0 0 60px rgba(124,156,255,.25);transition:transform .2s}
+  .orb:active{transform:scale(.97)}
+  .orb .initials{position:absolute;inset:0;display:grid;place-items:center;font-size:44px;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .orb.listening{background:radial-gradient(circle at 35% 30%,#a8fff2,#2fbfae 45%,#0f4f49 80%);box-shadow:0 0 0 0 rgba(79,209,197,.6);animation:pulse 1.4s infinite}
+  .orb.thinking{background:radial-gradient(circle at 35% 30%,#ffe2a8,#e0a53a 45%,#5a3d0a 80%);animation:breathe 1.2s infinite ease-in-out}
+  .orb.speaking{background:radial-gradient(circle at 35% 30%,#ffc2d1,#e85b7f 45%,#5c1426 80%);animation:talk .35s infinite alternate}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,209,197,.55)}100%{box-shadow:0 0 0 34px rgba(79,209,197,0)}}
+  @keyframes breathe{50%{transform:scale(1.05)}}
+  @keyframes talk{from{transform:scale(1)}to{transform:scale(1.045)}}
+  .status{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute);background:var(--panel2);padding:5px 12px;border-radius:8px}
+  .wave{display:flex;gap:3px;height:26px;align-items:center}
+  .wave i{width:3px;background:var(--mute);border-radius:3px;height:6px;transition:height .1s}
+  .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .interim{min-height:22px;color:var(--accent2);font-style:italic;text-align:center;max-width:640px}
+  .ask{display:flex;gap:8px;width:100%;max-width:680px}
+  .ask input{flex:1}
+  /* transcript */
+  .log{max-height:420px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px}
+  .msg{padding:10px 13px;border-radius:12px;max-width:92%;white-space:pre-wrap}
+  .msg.u{background:var(--panel2);align-self:flex-end;border:1px solid var(--line)}
+  .msg.a{background:#1d2540;align-self:flex-start;border:1px solid #2b3766}
+  .msg.sys{align-self:center;color:var(--mute);font-size:12.5px;background:none;padding:2px}
+  .msg .who{font-size:11.5px;color:var(--mute);display:block;margin-bottom:2px}
+  .tone{font-size:11px;color:var(--accent2);margin-left:6px}
+  /* handoff */
+  .handoff{display:none;background:linear-gradient(90deg,#3a2508,#2a1a07);border:1px solid var(--warn);color:#ffe1b0;padding:14px 16px;border-radius:12px;align-items:center;gap:12px;width:100%;max-width:680px}
+  .handoff.on{display:flex;animation:flash 1s 2}
+  .handoff b{color:var(--warn)}
+  @keyframes flash{50%{background:#5a3a0a}}
+  .side{display:flex;flex-direction:column;gap:18px}
+  ul.clean{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  ul.clean li{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:14px}
+  ul.clean li small{color:var(--mute);display:block}
+  .q li{border-left:3px solid var(--warn)}
+  .empty{color:var(--mute);font-size:13px}
+  .chip{display:inline-block;font-size:11.5px;background:#232838;border:1px solid var(--line);padding:1px 8px;border-radius:999px;margin-left:6px;color:var(--mute)}
+  .x{float:right;background:none;border:none;color:var(--mute);cursor:pointer}
+  .notice{background:#1b2232;border:1px solid #2c3a5c;border-radius:12px;padding:12px 14px;font-size:13.5px;color:#c9d3ea}
+  .notice b{color:#fff}
+  kbd{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;border-radius:5px}
+  .toggle{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--ink);margin:8px 0}
+  .toggle input{width:auto}
+  .cost{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--mute)}
+  .copied{color:var(--ok);font-size:12px;margin-left:8px}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="hTitle">Ada</h1>
+  <span class="sub" id="hSub">co-teacher vocale</span>
+  <div class="tabs">
+    <button class="tab on" data-view="live">In aula</button>
+    <button class="tab" data-view="setup">Preparazione</button>
+    <button class="tab" data-view="notes">Appunti</button>
+  </div>
+  <span class="sp"></span>
+  <span class="pill" id="pBrain">cervello: —</span>
+  <span class="pill" id="pMic">microfono: —</span>
+</header>
+
+<main>
+<!-- ============ IN AULA ============ -->
+<section class="view on" id="v-live">
+  <div class="grid">
+    <div class="card">
+      <div class="stage">
+        <div class="orb" id="orb" title="Clicca (o tieni premuto SPAZIO) per parlare"><div class="initials" id="orbInit">A</div></div>
+        <div class="status" id="status">pronta</div>
+        <div class="wave" id="wave"></div>
+        <div class="interim" id="interim"></div>
+        <div class="handoff" id="handoff">
+          <span style="font-size:24px">🙋‍♀️</span>
+          <div style="flex:1"><b>Per la docente:</b> <span id="handoffText"></span></div>
+          <button class="btn small warn" id="handoffOk">Presa in carico</button>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="btnTalk">🎙️ Parla</button>
+          <button class="btn" id="btnHands">Mani libere: OFF</button>
+          <button class="btn" id="btnStop">⏹ Zitta un attimo</button>
+          <button class="btn" id="btnQuiz">❓ Domanda alla classe</button>
+          <button class="btn" id="btnRecap">🧾 Riassunto</button>
+        </div>
+        <form class="ask" id="askForm">
+          <input type="text" id="askInput" placeholder="Oppure scrivi qui (es. «Sono Marco: che differenza c'è tra MVP e prototipo?»)" autocomplete="off">
+          <button class="btn" type="submit">Invia</button>
+        </form>
+        <div class="hint" id="liveHint"><kbd>Spazio</kbd> tieni premuto per parlare · <kbd>Esc</kbd> la interrompe · in «mani libere» risponde solo se la chiami per nome.</div>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+
+    <div class="side">
+      <div class="card">
+        <h2>Per la docente <span class="chip" id="qCount">0</span></h2>
+        <ul class="clean q" id="queue"><li class="empty">Nessuna domanda passata alla docente.</li></ul>
+      </div>
+      <div class="card">
+        <h2>Chi ha parlato <span class="chip" id="sCount">0</span></h2>
+        <ul class="clean" id="students"><li class="empty">Quando uno studente si presenta («sono Giulia…») Ada se lo ricorda.</li></ul>
+      </div>
+      <div class="card">
+        <h2>Appunti live</h2>
+        <ul class="clean" id="notesMini"><li class="empty">Ada annota i punti chiave e le domande aperte.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREPARAZIONE ============ -->
+<section class="view" id="v-setup">
+  <div class="grid">
+    <div class="card">
+      <h2>La lezione</h2>
+      <div class="row">
+        <div><label>Nome della co-teacher</label><input type="text" id="cfgName"></div>
+        <div><label>Come chiama te</label><input type="text" id="cfgTeacher"></div>
+      </div>
+      <div class="row">
+        <div><label>Corso / ateneo</label><input type="text" id="cfgCourse"></div>
+        <div><label>Argomento di oggi</label><input type="text" id="cfgTopic"></div>
+      </div>
+      <label>Materiale della lezione (incolla slide, scaletta, letture — oppure carica .txt/.md)</label>
+      <textarea id="cfgMaterial" style="min-height:200px"></textarea>
+      <div class="row" style="margin-top:8px"><input type="file" id="cfgFile" accept=".txt,.md,.markdown,.csv,.json" multiple style="flex:0"><span class="hint" id="matInfo"></span></div>
+      <label>Quando deve passare la parola a te</label>
+      <textarea id="cfgHandoff"></textarea>
+      <label>Personalità e stile</label>
+      <textarea id="cfgStyle"></textarea>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h2>Cervello (Claude)</h2>
+        <div id="brainNotice" class="notice"></div>
+        <div id="keyBox">
+          <label>Chiave API Anthropic (resta solo in questo browser)</label>
+          <input type="password" id="cfgKey" placeholder="sk-ant-..." autocomplete="off">
+          <label>Modello</label>
+          <select id="cfgModel">
+            <option value="claude-opus-5-5">Claude Opus 5.5 — la più brava (consigliato)</option>
+            <option value="claude-sonnet-5-5">Claude Sonnet 5.5 — bilanciato</option>
+            <option value="claude-haiku-5-5">Claude Haiku 5.5 — la più rapida ed economica</option>
+          </select>
+          <label>Tetto di spesa per sessione (USD)</label>
+          <input type="text" id="cfgBudget" value="5">
+          <div class="hint">Raggiunto il tetto, Ada smette di chiamare l'API. Stima: una lezione di 2 ore costa ~1–3 $ con Opus, pochi centesimi con Haiku.</div>
+          <div class="cost" id="costLine" style="margin-top:8px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Voce</h2>
+        <label>Voce italiana del sistema</label>
+        <select id="cfgVoice"></select>
+        <div class="row" style="margin-top:8px">
+          <div><label>Velocità</label><input type="range" id="cfgRate" min="0.7" max="1.4" step="0.05"></div>
+          <div><label>Tono</label><input type="range" id="cfgPitch" min="0.6" max="1.6" step="0.05"></div>
+        </div>
+        <button class="btn small" id="btnTestVoice" style="margin-top:8px">▶︎ Prova voce</button>
+        <label class="toggle"><input type="checkbox" id="cfgChime"> Suono quando passa la parola a te</label>
+        <div class="hint">Le voci migliori: su Mac «Alice / Federica (Avanzata)», su Chrome «Google italiano», su Edge «Elsa / Isabella Online (Natural)».</div>
+      </div>
+      <div class="card">
+        <h2>Memoria</h2>
+        <div class="hint" style="margin-bottom:10px">Ada ricorda studenti, domande e appunti anche se ricarichi la pagina (salvati solo in questo browser).</div>
+        <div class="row">
+          <button class="btn small" id="btnNewLesson">Nuova lezione (azzera chat e coda)</button>
+          <button class="btn small warn" id="btnWipe">Cancella tutta la memoria</button>
+        </div>
+      </div>
+      <button class="btn primary" id="btnSave">Salva e vai in aula →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPUNTI ============ -->
+<section class="view" id="v-notes">
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <h2 style="margin:0">Verbale della lezione</h2>
+      <div style="flex:0;display:flex;gap:8px">
+        <button class="btn small" id="btnCopyNotes">Copia</button>
+        <button class="btn small" id="btnDlNotes">Scarica .md</button>
+        <span class="copied" id="copied"></span>
+      </div>
+    </div>
+    <textarea id="notesFull" style="min-height:520px;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:13px" readonly></textarea>
+  </div>
+</section>
+</main>
+
+<script type="module">
+/* ==========================================================================
+   Ada — co-teacher vocale
+   Ascolta (Web Speech API) → ragiona (Claude) → parla (speechSynthesis)
+   Memoria: studenti, domande, appunti, coda per la docente (localStorage)
+   ========================================================================== */
+const $ = s => document.querySelector(s);
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem('ada.'+k); return v ? JSON.parse(v) : d; }catch{ return d; } },
+  set(k, v){ try{ localStorage.setItem('ada.'+k, JSON.stringify(v)); }catch{} }
+};
+
+/* ---------------- config ---------------- */
+const DEFAULT_CFG = {
+  name: 'Ada',
+  teacher: 'prof. Bianchini',
+  course: 'Politecnico di Milano',
+  topic: 'Product management con l\'AI',
+  material: '',
+  handoff: '- Voti, esami, scadenze, iscrizioni, regole del corso\n- Opinioni personali della docente o aneddoti della sua carriera\n- Questioni personali o delicate di uno studente\n- Quando non sei sicura al 100% della risposta o il materiale non la copre\n- Quando qualcuno chiede esplicitamente la docente',
+  style: 'Calda, ironica il giusto, precisa. Risposte brevi e parlate (2-4 frasi), come in aula: niente elenchi puntati, niente markdown. Fai esempi concreti da startup e corporate. Se una domanda è vaga, fai UNA domanda di chiarimento. Ogni tanto rilancia alla classe con una domanda.',
+  key: '', model: 'claude-opus-5-5', budget: 5,
+  voice: '', rate: 1.05, pitch: 1.05, chime: true
+};
+let cfg = Object.assign({}, DEFAULT_CFG, LS.get('cfg', {}));
+
+/* ---------------- memoria ---------------- */
+let mem = Object.assign({ students:{}, notes:[], queue:[], history:[], spent:0 }, LS.get('mem', {}));
+const saveMem = () => LS.set('mem', mem);
+
+/* ---------------- UI: tabs ---------------- */
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => show(t.dataset.view));
+function show(v){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.view === v));
+  document.querySelectorAll('.view').forEach(s => s.classList.toggle('on', s.id === 'v-'+v));
+  if (v === 'notes') $('#notesFull').value = buildMinutes();
+}
+
+/* ---------------- setup form ---------------- */
+const F = { name:'#cfgName', teacher:'#cfgTeacher', course:'#cfgCourse', topic:'#cfgTopic', material:'#cfgMaterial',
+            handoff:'#cfgHandoff', style:'#cfgStyle', key:'#cfgKey', model:'#cfgModel', budget:'#cfgBudget',
+            rate:'#cfgRate', pitch:'#cfgPitch' };
+function loadForm(){
+  for (const [k,s] of Object.entries(F)) $(s).value = cfg[k] ?? '';
+  $('#cfgChime').checked = !!cfg.chime;
+  matInfo();
+}
+function readForm(){
+  for (const [k,s] of Object.entries(F)) cfg[k] = $(s).value;
+  cfg.budget = parseFloat(String(cfg.budget).replace(',','.')) || 5;
+  cfg.rate = parseFloat(cfg.rate); cfg.pitch = parseFloat(cfg.pitch);
+  cfg.chime = $('#cfgChime').checked;
+  cfg.voice = $('#cfgVoice').value;
+  cfg.key = cfg.key.trim();
+  LS.set('cfg', cfg);
+  applyBrand();
+}
+function matInfo(){
+  const n = ($('#cfgMaterial').value || '').length;
+  $('#matInfo').textContent = n ? `${n.toLocaleString('it-IT')} caratteri di materiale` : 'nessun materiale: Ada userà le sue conoscenze generali';
+}
+$('#cfgMaterial').addEventListener('input', matInfo);
+$('#cfgFile').addEventListener('change', async e => {
+  for (const f of e.target.files){
+    const t = await f.text();
+    $('#cfgMaterial').value += (($('#cfgMaterial').value ? '\n\n' : '') + `### ${f.name}\n` + t);
+  }
+  matInfo();
+});
+$('#btnSave').onclick = () => { readForm(); client = null; refreshBrain(); show('live'); sys('Configurazione salvata.'); };
+$('#btnNewLesson').onclick = () => { mem.history = []; mem.queue = []; mem.notes = []; saveMem(); $('#log').innerHTML=''; renderSide(); sys('Nuova lezione: chat, appunti e coda azzerati. Gli studenti restano in memoria.'); };
+$('#btnWipe').onclick = () => {
+  const b = $('#btnWipe');
+  if (b.dataset.armed){ mem = { students:{}, notes:[], queue:[], history:[], spent:0 }; saveMem(); $('#log').innerHTML=''; renderSide(); b.textContent='Cancella tutta la memoria'; delete b.dataset.armed; sys('Memoria cancellata.'); }
+  else { b.dataset.armed = 1; b.textContent = 'Sicura? Clicca di nuovo'; setTimeout(()=>{ delete b.dataset.armed; b.textContent='Cancella tutta la memoria'; }, 4000); }
+};
+function applyBrand(){
+  $('#hTitle').textContent = cfg.name || 'Ada';
+  $('#orbInit').textContent = (cfg.name || 'A').trim().slice(0,1).toUpperCase();
+  $('#hSub').textContent = `co-teacher · ${cfg.topic || ''}`;
+  document.title = `${cfg.name} · co-teacher vocale`;
+}
+
+/* ---------------- voce (TTS) ---------------- */
+const synth = window.speechSynthesis;
+let voices = [];
+function loadVoices(){
+  if (!synth) return;
+  voices = synth.getVoices().filter(v => /^it/i.test(v.lang));
+  const all = voices.length ? voices : synth.getVoices();
+  const sel = $('#cfgVoice');
+  sel.innerHTML = all.map(v => `<option value="${v.name}">${v.name} (${v.lang})${v.localService?'':' · online'}</option>`).join('');
+  const pref = cfg.voice && all.find(v => v.name === cfg.voice)
+    || all.find(v => /natural|enhanced|avanzat|premium/i.test(v.name))
+    || all.find(v => /google/i.test(v.name)) || all[0];
+  if (pref) sel.value = pref.name;
+}
+if (synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+
+const TONES = {
+  neutro:      { r:1.00, p:1.00 },
+  entusiasta:  { r:1.10, p:1.15 },
+  divertito:   { r:1.08, p:1.18 },
+  riflessivo:  { r:0.90, p:0.95 },
+  empatico:    { r:0.94, p:1.05 },
+  serio:       { r:0.95, p:0.90 },
+  sorpreso:    { r:1.06, p:1.22 },
+  incuriosito: { r:1.00, p:1.10 }
+};
+let speaking = false;
+function speak(text, tone='neutro'){
+  return new Promise(res => {
+    if (!synth || !text){ res(); return; }
+    synth.cancel();
+    const t = TONES[tone] || TONES.neutro;
+    // frasi separate → pause naturali, e l'esitazione «ehm…» respira
+    const parts = text.replace(/\s+/g,' ').match(/[^.!?…]+[.!?…]*\s*/g) || [text];
+    const v = synth.getVoices().find(v => v.name === ($('#cfgVoice').value || cfg.voice));
+    let i = 0;
+    speaking = true; setState('speaking');
+    const next = () => {
+      if (!speaking || i >= parts.length){ speaking = false; setState(handsFree ? 'listening' : 'idle'); res(); return; }
+      const u = new SpeechSynthesisUtterance(parts[i++].trim());
+      u.lang = v?.lang || 'it-IT'; if (v) u.voice = v;
+      const jitter = () => (Math.random()-.5)*0.06;
+      u.rate = Math.min(2, (cfg.rate||1) * t.r + jitter());
+      u.pitch = Math.min(2, (cfg.pitch||1) * t.p + jitter());
+      u.onend = next; u.onerror = next;
+      synth.speak(u);
+    };
+    next();
+  });
+}
+function shush(){ speaking = false; synth && synth.cancel(); setState(handsFree ? 'listening' : 'idle'); }
+$('#btnTestVoice').onclick = () => { readForm(); speak(`Ciao a tutti, sono ${cfg.name}. Ehm… oggi aiuto ${cfg.teacher}. Pronti? Si parte!`, 'entusiasta'); };
+
+let audioCtx;
+function chime(){
+  if (!cfg.chime) return;
+  try{
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    [880, 1320].forEach((f, k) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.frequency.value = f; o.type = 'sine';
+      g.gain.setValueAtTime(0.0001, audioCtx.currentTime + k*0.18);
+      g.gain.exponentialRampToValueAtTime(0.25, audioCtx.currentTime + k*0.18 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + k*0.18 + 0.35);
+      o.connect(g).connect(audioCtx.destination); o.start(audioCtx.currentTime + k*0.18); o.stop(audioCtx.currentTime + k*0.18 + 0.4);
+    });
+  }catch{}
+}
+
+/* ---------------- ascolto (STT) ---------------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null, recOn = false, handsFree = false, pttBuffer = '', micBlocked = false;
+function micPill(txt, cls){ const p = $('#pMic'); p.textContent = 'microfono: ' + txt; p.className = 'pill ' + (cls||''); }
+if (!SR) micPill('non supportato', 'bad'); else micPill('pronto', 'ok');
+
+function makeRec(){
+  const r = new SR();
+  r.lang = 'it-IT'; r.interimResults = true; r.continuous = true; r.maxAlternatives = 1;
+  r.onresult = e => {
+    let interim = '', finalTxt = '';
+    for (let i = e.resultIndex; i < e.results.length; i++){
+      const s = e.results[i][0].transcript;
+      if (e.results[i].isFinal) finalTxt += s; else interim += s;
+    }
+    // barge-in: se qualcuno parla mentre Ada parla, lei si ferma
+    if ((interim || finalTxt) && speaking && handsFree && mentionsName(interim + finalTxt)) shush();
+    $('#interim').textContent = interim;
+    if (finalTxt){
+      if (handsFree){
+        if (mentionsName(finalTxt)) { $('#interim').textContent=''; handle(finalTxt.trim()); }
+      } else pttBuffer += ' ' + finalTxt;
+    }
+  };
+  r.onerror = e => {
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed'){
+      micBlocked = true; micPill('bloccato', 'bad');
+      sys('Il microfono non è disponibile qui. Usa la casella di testo, oppure apri la versione da scaricare (vedi README) in Chrome/Edge.');
+      handsFree = false; $('#btnHands').textContent = 'Mani libere: OFF';
+    }
+  };
+  r.onend = () => { recOn = false; if (handsFree && !micBlocked) setTimeout(startRec, 250); };
+  return r;
+}
+function startRec(){
+  if (!SR || micBlocked || recOn) return;
+  try{ rec = rec || makeRec(); rec.start(); recOn = true; micPill('in ascolto', 'ok'); }catch{}
+}
+function stopRec(){ try{ rec && rec.stop(); }catch{} recOn = false; micPill(micBlocked ? 'bloccato':'pronto', micBlocked?'bad':'ok'); }
+function mentionsName(t){
+  const n = (cfg.name || 'Ada').toLowerCase();
+  return t.toLowerCase().includes(n);
+}
+
+// push-to-talk
+let pttActive = false;
+function pttDown(){
+  if (!SR || micBlocked){ $('#askInput').focus(); return; }
+  if (pttActive) return;
+  shush(); pttActive = true; pttBuffer = ''; setState('listening'); startRec();
+}
+function pttUp(){
+  if (!pttActive) return;
+  pttActive = false;
+  setTimeout(() => { // lascia arrivare l'ultimo risultato
+    if (!handsFree) stopRec();
+    const t = (pttBuffer + ' ' + $('#interim').textContent).trim();
+    $('#interim').textContent = ''; pttBuffer = '';
+    if (t) handle(t); else setState('idle');
+  }, 450);
+}
+const orb = $('#orb');
+['mousedown','touchstart'].forEach(ev => orb.addEventListener(ev, e => { e.preventDefault(); pttDown(); }));
+['mouseup','mouseleave','touchend'].forEach(ev => orb.addEventListener(ev, () => pttUp()));
+$('#btnTalk').addEventListener('mousedown', pttDown);
+$('#btnTalk').addEventListener('touchstart', e => { e.preventDefault(); pttDown(); });
+['mouseup','mouseleave','touchend'].forEach(ev => $('#btnTalk').addEventListener(ev, pttUp));
+document.addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if (e.code === 'Space' && !typing && !e.repeat){ e.preventDefault(); pttDown(); }
+  if (e.code === 'Escape') shush();
+});
+document.addEventListener('keyup', e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if (e.code === 'Space' && !typing){ e.preventDefault(); pttUp(); }
+});
+$('#btnHands').onclick = () => {
+  if (!SR || micBlocked){ sys('Mani libere richiede il microfono (Chrome o Edge).'); return; }
+  handsFree = !handsFree;
+  $('#btnHands').textContent = 'Mani libere: ' + (handsFree ? 'ON' : 'OFF');
+  if (handsFree){ startRec(); setState('listening'); sys(`Mani libere attivo: ${cfg.name} risponde quando sente il suo nome.`); }
+  else { stopRec(); setState('idle'); }
+};
+$('#btnStop').onclick = shush;
+$('#askForm').onsubmit = e => { e.preventDefault(); const t = $('#askInput').value.trim(); if (t){ $('#askInput').value=''; handle(t); } };
+$('#btnQuiz').onclick = () => handle('[COMANDO DOCENTE] Fai una domanda stimolante alla classe sull\'argomento di oggi, collegata a quello di cui abbiamo appena parlato. Una sola domanda, poi aspetta.', { silentUser:true });
+$('#btnRecap').onclick = () => handle('[COMANDO DOCENTE] Fai un riassunto parlato di 4-5 frasi di quello che è emerso finora in aula, citando chi ha fatto le domande più interessanti.', { silentUser:true });
+$('#handoffOk').onclick = () => { $('#handoff').classList.remove('on'); };
+
+/* ---------------- stato visivo ---------------- */
+const STATE_LABEL = { idle:'pronta', listening:'in ascolto', thinking:'ci penso…', speaking:'sta parlando' };
+function setState(s){
+  orb.className = 'orb ' + (s === 'idle' ? '' : s);
+  $('#status').textContent = STATE_LABEL[s] || s;
+}
+const wave = $('#wave'); wave.innerHTML = '<i></i>'.repeat(28);
+setInterval(() => {
+  const on = orb.classList.contains('speaking') || orb.classList.contains('listening');
+  wave.querySelectorAll('i').forEach(b => b.style.height = (on ? 4 + Math.random()*22 : 4) + 'px');
+}, 110);
+
+/* ---------------- log ---------------- */
+function addMsg(role, text, meta=''){
+  const d = document.createElement('div');
+  d.className = 'msg ' + role;
+  const who = role === 'u' ? (meta || 'Aula') : (cfg.name || 'Ada');
+  d.innerHTML = `<span class="who">${esc(who)}${role==='a' && meta ? `<span class="tone">· ${esc(meta)}</span>`:''}</span>`;
+  d.appendChild(document.createTextNode(text));
+  $('#log').appendChild(d); $('#log').scrollTop = 1e9;
+}
+function sys(t){ const d = document.createElement('div'); d.className='msg sys'; d.textContent=t; $('#log').appendChild(d); $('#log').scrollTop=1e9; }
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------------- side panels ---------------- */
+function renderSide(){
+  const q = mem.queue.filter(x => !x.done);
+  $('#qCount').textContent = q.length;
+  $('#queue').innerHTML = q.length ? q.map((x,i) => `<li><button class="x" data-q="${mem.queue.indexOf(x)}" title="fatto">✓</button>${esc(x.question)}<small>${esc(x.student||'studente')} · ${esc(x.reason||'')} · ${x.time}</small></li>`).join('')
+    : '<li class="empty">Nessuna domanda passata alla docente.</li>';
+  $('#queue').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { mem.queue[+b.dataset.q].done = true; saveMem(); renderSide(); });
+
+  const st = Object.values(mem.students).sort((a,b) => b.last - a.last);
+  $('#sCount').textContent = st.length;
+  $('#students').innerHTML = st.length ? st.map(s => `<li><b>${esc(s.name)}</b><span class="chip">${s.count} interv.</span><small>${esc(s.summary || (s.questions.at(-1)||''))}</small></li>`).join('')
+    : '<li class="empty">Quando uno studente si presenta («sono Giulia…») Ada se lo ricorda.</li>';
+
+  const n = mem.notes.slice(-6).reverse();
+  $('#notesMini').innerHTML = n.length ? n.map(x => `<li>${x.kind==='domanda aperta'?'❔':'📌'} ${esc(x.text)}<small>${x.time}</small></li>`).join('')
+    : '<li class="empty">Ada annota i punti chiave e le domande aperte.</li>';
+  costLine();
+}
+function costLine(){ $('#costLine').textContent = `Speso in questa memoria: ~${mem.spent.toFixed(3)} $ / tetto ${cfg.budget} $`; }
+const now = () => new Date().toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
+
+function buildMinutes(){
+  const d = new Date().toLocaleDateString('it-IT', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  let md = `# ${cfg.topic}\n${cfg.course} · ${d}\nDocente: ${cfg.teacher} · Co-teacher: ${cfg.name}\n\n`;
+  md += `## Punti chiave\n` + (mem.notes.filter(n=>n.kind!=='domanda aperta').map(n=>`- ${n.text} (${n.time})`).join('\n') || '- —') + '\n\n';
+  md += `## Domande aperte\n` + (mem.notes.filter(n=>n.kind==='domanda aperta').map(n=>`- ${n.text} (${n.time})`).join('\n') || '- —') + '\n\n';
+  md += `## Passate alla docente\n` + (mem.queue.map(q=>`- [${q.done?'x':' '}] ${q.question} — ${q.student||'studente'} (${q.reason||''}, ${q.time})`).join('\n') || '- —') + '\n\n';
+  md += `## Studenti intervenuti\n` + (Object.values(mem.students).map(s=>`- **${s.name}** (${s.count}): ${s.questions.join(' | ')}`).join('\n') || '- —') + '\n\n';
+  md += `## Trascrizione\n` + mem.history.map(h => h.role === 'user' ? `> ${h.content}` : `**${cfg.name}:** ${safeParse(h.content)?.risposta ?? h.content}`).join('\n\n') + '\n';
+  return md;
+}
+$('#btnCopyNotes').onclick = async () => { try{ await navigator.clipboard.writeText(buildMinutes()); $('#copied').textContent='copiato ✓'; }catch{ $('#notesFull').select(); $('#copied').textContent='seleziona e copia (Ctrl/Cmd+C)'; } setTimeout(()=>$('#copied').textContent='',2500); };
+$('#btnDlNotes').onclick = () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([buildMinutes()], {type:'text/markdown'}));
+  a.download = `lezione-${new Date().toISOString().slice(0,10)}.md`; a.click();
+};
+
+/* ---------------- cervello ---------------- */
+const SCHEMA = {
+  type:'object', additionalProperties:false,
+  required:['risposta','tono','studente','passa_alla_docente','motivo_passaggio','domanda_per_docente','nota','tipo_nota','sintesi_studente'],
+  properties:{
+    risposta:{ type:'string', description:'Cosa dici ad alta voce, in italiano parlato. Niente markdown.' },
+    tono:{ type:'string', enum:Object.keys(TONES) },
+    studente:{ type:'string', description:'Nome dello studente che ha parlato, se noto (anche da turni precedenti), altrimenti stringa vuota.' },
+    passa_alla_docente:{ type:'boolean' },
+    motivo_passaggio:{ type:'string', description:'Perché passi la parola alla docente; vuoto se non passi.' },
+    domanda_per_docente:{ type:'string', description:'La domanda riformulata in una riga per la docente; vuota se non passi.' },
+    nota:{ type:'string', description:'Un punto chiave o una domanda aperta da mettere a verbale, in una riga; vuota se niente di nuovo.' },
+    tipo_nota:{ type:'string', enum:['punto chiave','domanda aperta','nessuna'] },
+    sintesi_studente:{ type:'string', description:'Aggiornamento in max 12 parole su cosa interessa a questo studente; vuoto se nessuno studente.' }
+  }
+};
+
+function systemPrompt(){
+  return `Sei ${cfg.name}, co-teacher vocale in aula accanto a ${cfg.teacher}. Corso: ${cfg.course}. Argomento della lezione: ${cfg.topic}.
+Parli ad alta voce a una classe universitaria: quello che scrivi in "risposta" viene letto da una sintesi vocale.
+
+STILE
+${cfg.style}
+- Sei una persona vera, non un assistente: puoi ridere ("ahah"), esitare ("ehm…", "allora…"), stupirti. Usalo con misura, quando è naturale.
+- Scegli "tono" in base a cosa ti dicono: entusiasta per una bella intuizione, empatico se qualcuno è in difficoltà, divertito per una battuta, riflessivo per domande profonde.
+- Se conosci il nome di chi parla, usalo. Se uno studente è già intervenuto, collegati a quello che aveva chiesto ("Marco, prima mi chiedevi…").
+- Se qualcuno parla senza dire chi è e il nome serve, puoi chiederlo con leggerezza, ma non ogni volta.
+- I messaggi che iniziano con [COMANDO DOCENTE] vengono dalla docente: eseguili.
+
+QUANDO PASSI LA PAROLA A ${cfg.teacher.toUpperCase()}
+${cfg.handoff}
+Quando passi: imposta passa_alla_docente=true, nella risposta dillo in modo naturale ("Bella domanda, questa la giro a ${cfg.teacher}…"), e se puoi aggiungi un mezzo spunto senza rispondere al posto suo.
+
+APPUNTI
+Dopo ogni scambio, se è emerso un concetto importante o una domanda che resta aperta, mettilo in "nota" (una riga). Non ripetere note già presenti.
+
+MATERIALE DELLA LEZIONE (fonte principale; se una risposta non è coperta dal materiale e non sei sicura, passa alla docente)
+<materiale>
+${cfg.material || '(nessun materiale caricato: usa le tue conoscenze, con prudenza)'}
+</materiale>`;
+}
+
+function memoryBlock(){
+  const st = Object.values(mem.students).map(s => `- ${s.name}: ${s.count} interventi. ${s.summary||''} Ultime domande: ${s.questions.slice(-3).join(' | ')}`).join('\n') || '(nessuno ancora)';
+  const notes = mem.notes.slice(-15).map(n => `- [${n.kind}] ${n.text}`).join('\n') || '(nessuno)';
+  const q = mem.queue.filter(x=>!x.done).map(x => `- ${x.question} (${x.student||'?'})`).join('\n') || '(nessuna)';
+  return `[MEMORIA — ora ${now()}]\nStudenti che hai già incontrato:\n${st}\nAppunti presi finora:\n${notes}\nDomande in attesa della docente:\n${q}`;
+}
+
+let client = null, sample = null, brain = 'none';
+async function refreshBrain(){
+  const p = $('#pBrain'), n = $('#brainNotice');
+  if (sample){ brain = 'sample'; p.textContent = 'cervello: Claude (incluso)'; p.className='pill ok';
+    n.innerHTML = '<b>Collegata a Claude tramite la pagina.</b> Non serve una chiave API. Al primo messaggio ti verrà chiesto il consenso.'; $('#keyBox').style.display='none'; return; }
+  if (cfg.key){ brain = 'api'; p.textContent = 'cervello: ' + cfg.model.replace('claude-',''); p.className='pill ok';
+    n.innerHTML = 'Uso la <b>tua chiave API</b> direttamente da questo browser. Non condividere lo schermo mentre la incolli.'; $('#keyBox').style.display=''; return; }
+  brain = 'none'; p.textContent = 'cervello: manca la chiave'; p.className='pill bad';
+  n.innerHTML = 'Incolla una chiave API Anthropic (console.anthropic.com → API keys). Resta salvata solo in questo browser.'; $('#keyBox').style.display='';
+}
+
+async function getClient(){
+  if (client) return client;
+  const { default: Anthropic } = await import('https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@1.6.0/+esm');
+  client = new Anthropic({ apiKey: cfg.key, dangerouslyAllowBrowser: true, maxRetries: 2 });
+  return client;
+}
+
+const PRICES = { 'claude-opus-5-5':[4,20], 'claude-sonnet-5-5':[2,10], 'claude-haiku-5-5':[0.1,0.5] };
+
+async function think(messages){
+  if (brain === 'sample'){
+    const prompt = systemPrompt() + '\n\n' +
+      'Rispondi SOLO con un oggetto JSON con queste chiavi: ' + JSON.stringify(SCHEMA.properties) + '\n\n' +
+      'CONVERSAZIONE:\n' + messages.map(m => (m.role === 'user' ? 'AULA: ' : `${cfg.name.toUpperCase()}: `) + m.content).join('\n');
+    const out = await sample.json(prompt, { modelTier:'quick', cache:false });
+    return typeof out === 'string' ? safeParse(out) : out;
+  }
+  if (brain === 'api'){
+    if (mem.spent >= cfg.budget) throw new Error(`Tetto di spesa raggiunto (${cfg.budget} $). Alzalo in Preparazione se vuoi continuare.`);
+    const c = await getClient();
+    const params = {
+      model: cfg.model,
+      max_tokens: 2000,
+      system: [{ type:'text', text: systemPrompt(), cache_control:{ type:'ephemeral' } }],
+      messages,
+      output_config: { effort:'low', format:{ type:'json_schema', schema: SCHEMA } }
+    };
+    let r;
+    if (cfg.model !== 'claude-haiku-5-5'){
+      r = await c.beta.messages.create({ ...params, betas:['server-side-fallback-2026-07-01'], fallbacks:'default' });
+    } else {
+      r = await c.messages.create(params);
+    }
+    const u = r.usage || {};
+    const [pi, po] = PRICES[cfg.model] || [4,20];
+    mem.spent += ((u.input_tokens||0) + (u.cache_creation_input_tokens||0)*1.25 + (u.cache_read_input_tokens||0)*0.1) * pi / 1e6 + (u.output_tokens||0) * po / 1e6;
+    if (r.stop_reason === 'refusal') return { risposta:`Su questa preferisco lasciare la parola a ${cfg.teacher}.`, tono:'serio', passa_alla_docente:true, motivo_passaggio:'tema delicato', domanda_per_docente:messages.at(-1).content.slice(0,160), nota:'', tipo_nota:'nessuna', studente:'', sintesi_studente:'' };
+    const txt = (r.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    return safeParse(txt);
+  }
+  throw new Error('Manca il collegamento a Claude: vai in Preparazione e incolla la chiave API.');
+}
+function safeParse(t){
+  if (!t) return null;
+  try{ return JSON.parse(t); }catch{}
+  const m = String(t).match(/\{[\s\S]*\}/); if (m){ try{ return JSON.parse(m[0]); }catch{} }
+  return null;
+}
+
+/* ---------------- il turno ---------------- */
+let busy = false;
+async function handle(text, opts={}){
+  if (busy) return;
+  busy = true; shush(); setState('thinking');
+  if (!opts.silentUser) addMsg('u', text);
+  else sys(text.replace('[COMANDO DOCENTE] ','Comando: '));
+  try{
+    const hist = mem.history.slice(-16);
+    // la memoria viaggia nel turno utente corrente (così il system resta in cache)
+    const messages = [...hist, { role:'user', content: memoryBlock() + '\n\n[TRASCRIZIONE DAL MICROFONO]\n' + text }];
+    const out = await think(messages);
+    if (!out || !out.risposta) throw new Error('Risposta non valida dal modello.');
+    mem.history.push({ role:'user', content:text }, { role:'assistant', content: JSON.stringify(out) });
+    if (mem.history.length > 60) mem.history = mem.history.slice(-60);
+
+    // memoria studenti
+    const name = (out.studente || '').trim();
+    if (name && !/^(studente|aula|classe|docente|sconosciut)/i.test(name)){
+      const k = name.toLowerCase();
+      const s = mem.students[k] || (mem.students[k] = { name, count:0, questions:[], summary:'', last:0 });
+      s.count++; s.last = Date.now(); s.questions.push(text.slice(0,140)); s.questions = s.questions.slice(-8);
+      if (out.sintesi_studente) s.summary = out.sintesi_studente;
+    }
+    // appunti
+    if (out.nota && out.tipo_nota !== 'nessuna' && !mem.notes.some(n => n.text === out.nota))
+      mem.notes.push({ text: out.nota, kind: out.tipo_nota, time: now() });
+    // passaggio alla docente
+    if (out.passa_alla_docente){
+      const qq = out.domanda_per_docente || text;
+      mem.queue.push({ question: qq, student: name, reason: out.motivo_passaggio, time: now(), done:false });
+      $('#handoffText').textContent = `${qq}${name ? ' — ' + name : ''}`;
+      $('#handoff').classList.add('on'); chime();
+    }
+    saveMem(); renderSide();
+    addMsg('a', out.risposta, out.tono);
+    busy = false;
+    await speak(out.risposta, out.tono);
+  }catch(err){
+    console.error(err);
+    const msg = err?.status === 401 ? 'Chiave API non valida.' : err?.status === 429 ? 'Troppe richieste: aspetta qualche secondo.' : (err?.message || String(err));
+    sys('⚠️ ' + msg);
+    if (err?.code === 'not_granted'){ sample = null; refreshBrain(); }
+    setState(handsFree ? 'listening' : 'idle');
+  }finally{ busy = false; }
+}
+
+/* ---------------- avvio ---------------- */
+loadForm(); applyBrand(); renderSide(); refreshBrain();
+for (const h of mem.history.slice(-10)){
+  if (h.role === 'user') addMsg('u', h.content); else { const o = safeParse(h.content); addMsg('a', o?.risposta ?? h.content, o?.tono); }
+}
+if (!cfg.key) sys('Benvenuta! Vai su «Preparazione» per caricare il materiale della lezione e collegare Claude.');
+
+// Se la pagina gira dentro Claude (artifact), usa Claude senza chiave API
+(async () => {
+  try{
+    if (window.claude?.use){
+      const s = await window.claude.use('sample');
+      if (s){ sample = s; refreshBrain(); sys(`${cfg.name} è collegata a Claude. Il microfono non funziona dentro l'anteprima: scrivi le domande, oppure apri la versione standalone per la voce.`); }
+    }
+  }catch{}
+})();
+</script>
+</body>
+</html>

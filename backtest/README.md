@@ -28,3 +28,21 @@ Lo scenario di costi basso, con 0 € di imposte, è quello in tabella. Con un m
 - **Il vincitore era noto in partenza:** sapevamo già che BTC sarebbe "sopravvissuto". Nel 2018 non era ovvio, e lo stesso test su altre crypto darebbe risultati molto peggiori.
 - **Liquidità a rendimento 0, imposte escluse.** In Italia sono il 26% sulle plusvalenze da ETF; per le crypto l'aliquota è salita a partire dal 2026.
 - **Nessuna verifica sui dati intraday:** il test non dice nulla su trading a minuti o millisecondi.
+
+# Estensione: singole azioni (Piazza Affari e tech USA)
+Si lancia con `python3 backtest/backtest_azioni.py`. Le tabelle sono in `risultati_azioni.md`, il grafico in `equity_azioni.png`.
+
+- **Universo:** 23 grandi titoli italiani e 17 grandi tech USA, scelti come li si sarebbe scelti a fine 2017, inclusi quelli poi andati male.
+- **Strategie:** ETF indice tenuto fermo, tutti i titoli a pesi uguali, momentum sui 5 titoli migliori, momentum con trend filter.
+
+**Esito con costi bassi:**
+
+| | ETF indice | Pesi uguali | Momentum top 5 | Momentum + trend |
+|---|---:|---:|---:|---:|
+| Italia: 100 € diventano | 307 € | 361 € | 323 € | 339 € (calo massimo -23%) |
+| Tech USA: 100 € diventano | 469 € | 614 € | 915 € | 403 € |
+
+Cosa si vede:
+- **Tech USA:** il momentum batte l'indice in tutte e due le metà del periodo e con 3, 5, 7 o 10 titoli. Il suo Sharpe (0,92) è però pari a quello dell'ETF (0,95): rende di più perché rischia di più, non perché sceglie meglio. Su questi anni pesa molto Nvidia.
+- **Italia:** il momentum non batte l'indice. Il trend filter dimezza il calo massimo.
+- **Con il minimo di 1 € a operazione e 100 € di capitale le strategie su singoli titoli non sono eseguibili.** A pesi uguali nessuna operazione passa la soglia; il momentum finisce tra 43 e 191 €.

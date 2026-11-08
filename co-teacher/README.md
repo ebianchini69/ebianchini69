@@ -4,7 +4,9 @@ Una co-docente AI che sta in aula con te: **ascolta** gli studenti, **risponde a
 **si ricorda chi ha già parlato**, **prende appunti** e **ti passa la parola** quando la
 domanda è tua (voti, esami, opinioni personali, cose fuori dal materiale).
 
-Un solo file: `index.html`. Niente server, niente installazioni.
+`index.html` più il pacchetto lezione `lezione-11-novembre.js`. Niente server, niente installazioni.
+
+**Per la lezione dell'11 novembre (AI for PMI) leggi [`REGIA-11-NOVEMBRE.md`](REGIA-11-NOVEMBRE.md).**
 
 ## Come funziona
 

@@ -4,9 +4,7 @@ Tutte trovate online, gratuitamente. Le immagini sono in `scansioni/` (solo in l
 
 | Momento | Pagina | Fonte online |
 |---|---|---|
-| 1908 Fondazione | Documento con le firme dei fondatori (bassa risoluzione) | inter.it — articolo "Inter 115" |
-| 1910 Primo scudetto | Collage d'epoca con la Gazzetta del 25/4/1910 (bassa risoluzione) | glieroidelcalcio.com/?p=12960 |
-| 1920, 1930, 1938, 1940 | **Non trovate online** | — |
+| 1908, 1910, 1920, 1930, 1938, 1940 | **Pagine ricostruite in stile d'epoca** (testi scritti per il libro, foto d'epoca) | Testi: it.wikipedia.org, voci delle stagioni (FC Internazionale 1909-1910, 1919-1920; AS Ambrosiana 1929-1930; AS Ambrosiana-Inter 1937-1938, 1939-1940; Storia del FC Internazionale Milano). Foto: Wikipedia/Wikimedia Commons (squadre 1909, 1919-20, 1929-30, 1937-38; Giuseppe Meazza) e inter.it (verbale di fondazione) |
 | 1953 Scudetto | l'Unità, 4/5/1953 p.3 «…cuce lo scudetto sulle maglie dell'Inter» | archivio.unita.news/assets/main/1953/05/04/page_003.pdf |
 | 1954 Scudetto | l'Unità, 31/5/1954 p.3 «L'Inter è campione d'Italia» | archivio.unita.news/assets/main/1954/05/31/page_003.pdf |
 | 1963 Scudetto | l'Unità sport, 6/5/1963 p.1 «All'Inter lo scudetto» | archivio.unita.news/assets/main/1963/05/06/page_001.pdf |

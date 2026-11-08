@@ -4,12 +4,12 @@ Metti ogni file nella cartella `scansioni/` con il nome indicato (jpg, png o web
 
 | Fatto | File | Momento | Giornale da cercare |
 |---|---|---|---|
-| ✅ | `1908-fondazione.jpg` | 9 marzo 1908 · Nasce l'Internazionale | Il documento di fondazione firmato dai soci, Milano, 9 marzo 1908 |
-| ✅ | `1910-primo-scudetto.jpg` | 24 aprile 1910 · Il primo scudetto, a due anni dalla nascita | La Gazzetta dello Sport, 25 aprile 1910 (collage d'epoca) |
-| ⬜ | `1920-secondo-scudetto.jpg` | 20 giugno 1920 · Il secondo titolo dopo la Grande Guerra | La Gazzetta dello Sport, 21 giugno 1920 |
-| ⬜ | `1930-scudetto-meazza.jpg` | 29 giugno 1930 · Il primo campionato a girone unico è nerazzurro | La Gazzetta dello Sport, 30 giugno 1930 |
-| ⬜ | `1938-scudetto.jpg` | 24 aprile 1938 · Ambrosiana-Inter, di nuovo campione | La Gazzetta dello Sport, 25 aprile 1938 |
-| ⬜ | `1940-scudetto.jpg` | 2 giugno 1940 · Il quinto scudetto alla vigilia della guerra | La Gazzetta dello Sport, 3 giugno 1940 |
+| ✅ | `1908-fondazione.jpg` | 9 marzo 1908 · Nasce l'Internazionale | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 10 marzo 1908 |
+| ✅ | `1910-primo-scudetto.jpg` | 24 aprile 1910 · Il primo scudetto, a due anni dalla nascita | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 25 aprile 1910 |
+| ✅ | `1920-secondo-scudetto.jpg` | 20 giugno 1920 · Il secondo titolo dopo la Grande Guerra | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 21 giugno 1920 |
+| ✅ | `1930-scudetto-meazza.jpg` | 29 giugno 1930 · Il primo campionato a girone unico è nerazzurro | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 30 giugno 1930 |
+| ✅ | `1938-scudetto.jpg` | 24 aprile 1938 · Ambrosiana-Inter, di nuovo campione | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 25 aprile 1938 |
+| ✅ | `1940-scudetto.jpg` | 2 giugno 1940 · Il quinto scudetto alla vigilia della guerra | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 3 giugno 1940 |
 | ✅ | `1953-scudetto.jpg` | 3 maggio 1953 · Lo scudetto di Foni | l'Unità del lunedì, 4 maggio 1953, pagina sportiva |
 | ✅ | `1954-scudetto.jpg` | 30 maggio 1954 · Il bis | l'Unità del lunedì, 31 maggio 1954, pagina sportiva |
 | ✅ | `1963-scudetto.jpg` | 5 maggio 1963 · Il Mago vince il primo scudetto | l'Unità sport, 6 maggio 1963, prima pagina |

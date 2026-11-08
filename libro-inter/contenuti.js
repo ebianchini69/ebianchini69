@@ -50,7 +50,7 @@ module.exports = {
           testo:
             "Al ristorante L'Orologio, in centro a Milano, un gruppo di soci in dissenso con il Milan fonda una nuova squadra. Il nome è una dichiarazione d'intenti: Internazionale, aperta ai giocatori stranieri. I colori sono il nero e l'azzurro.",
           tabellino: "Milano, ristorante L'Orologio",
-          giornale: "Il documento di fondazione firmato dai soci, Milano, 9 marzo 1908",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 10 marzo 1908",
         },
         {
           id: "1910-primo-scudetto",
@@ -59,7 +59,7 @@ module.exports = {
           testo:
             "Lo spareggio con la Pro Vercelli finisce 10-3. I piemontesi, in polemica con la data fissata, schierano i ragazzi delle giovanili. L'Inter è campione d'Italia per la prima volta.",
           tabellino: "Inter – Pro Vercelli 10-3 · spareggio scudetto",
-          giornale: "La Gazzetta dello Sport, 25 aprile 1910 (collage d'epoca)",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 25 aprile 1910",
         },
         {
           id: "1920-secondo-scudetto",
@@ -68,7 +68,7 @@ module.exports = {
           testo:
             "Il calcio riparte dopo il conflitto e l'Inter torna sul tetto d'Italia battendo il Livorno nella finale del campionato.",
           tabellino: "Finale a Bologna: Inter – Livorno 3-2",
-          giornale: "La Gazzetta dello Sport, 21 giugno 1920",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 21 giugno 1920",
         },
       ],
     },
@@ -86,7 +86,7 @@ module.exports = {
           testo:
             "Nasce la Serie A come la conosciamo e la vince l'Ambrosiana. Giuseppe Meazza, vent'anni appena, è capocannoniere con 31 gol: il ragazzo di Porta Vittoria diventa il simbolo di Milano.",
           tabellino: "Ambrosiana – Juventus 2-0 · Meazza capocannoniere con 31 gol",
-          giornale: "La Gazzetta dello Sport, 30 giugno 1930",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 30 giugno 1930",
         },
         {
           id: "1938-scudetto",
@@ -95,7 +95,7 @@ module.exports = {
           testo:
             "Sotto il nome di Ambrosiana-Inter arriva il quarto scudetto. Meazza è ancora il capocannoniere del campionato.",
           tabellino: "Bari – Ambrosiana-Inter 0-2 · Meazza, Frossi",
-          giornale: "La Gazzetta dello Sport, 25 aprile 1938",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 25 aprile 1938",
         },
         {
           id: "1940-scudetto",
@@ -104,7 +104,7 @@ module.exports = {
           testo:
             "L'ultimo titolo prima che il conflitto fermi tutto. Pochi anni dopo, nel 1945, la squadra riprenderà il suo nome: Internazionale.",
           tabellino: "Ambrosiana-Inter – Bologna 1-0",
-          giornale: "La Gazzetta dello Sport, 3 giugno 1940",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 3 giugno 1940",
         },
       ],
     },

@@ -4,7 +4,7 @@ Metti ogni file nella cartella `scansioni/` con il nome indicato (jpg, png o web
 
 | Fatto | File | Momento | Giornale da cercare |
 |---|---|---|---|
-| ✅ | `1908-fondazione.jpg` | 9 marzo 1908 · Nasce l'Internazionale | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 10 marzo 1908 |
+| ✅ | `1908-fondazione.jpg` | 9 marzo 1908 · Nasce l'Internazionale | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 11 marzo 1908 |
 | ✅ | `1910-primo-scudetto.jpg` | 24 aprile 1910 · Il primo scudetto, a due anni dalla nascita | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 25 aprile 1910 |
 | ✅ | `1920-secondo-scudetto.jpg` | 20 giugno 1920 · Il secondo titolo dopo la Grande Guerra | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 21 giugno 1920 |
 | ✅ | `1930-scudetto-meazza.jpg` | 29 giugno 1930 · Il primo campionato a girone unico è nerazzurro | Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 30 giugno 1930 |

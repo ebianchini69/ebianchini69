@@ -18,7 +18,7 @@ dei giornali del giorno dopo. Uso strettamente privato (le pagine sono coperte d
    - **2009–2026**: prime pagine de *La Gazzetta dello Sport* dall'archivio di prime pagine `kiosko.net`
      (2009–2021 a ~760 px di larghezza, 2023–2026 a 1000–1400 px).
    - **1908–1940**: nessuna pagina disponibile online in qualità sufficiente (l'archivio La Stampa non risponde).
-3. **Pagine ricostruite in stile d'epoca** per 1908, 1910, 1920, 1930, 1938, 1940 (`ricostruzioni/`):
+3. **Pagine ricostruite in stile d'epoca** per 1908 (datata Gazzetta di mercoledì 11/3/1908), 1910, 1920, 1930, 1938, 1940 (`ricostruzioni/`):
    testata e impaginazione in stile Gazzetta d'epoca su carta rosa invecchiata, articoli scritti per il libro
    in italiano d'epoca, basati sui fatti delle voci Wikipedia delle singole stagioni, con le foto d'epoca delle squadre
    e di Meazza. In fondo a ogni pagina una riga dichiara che è una ricostruzione.
@@ -40,7 +40,19 @@ node build.js --anteprima      # rigenera il PDF in out/ (+ PNG di controllo)
 Le immagini (`scansioni/`, `ricostruzioni/foto/`) e i PDF (`out/`) NON sono nel repository (diritti):
 sono su Google Drive.
 
+## Opzioni a pagamento (ricerca dell'8/11/2026)
+- **Biblioteca Braidense, Milano** (raccomandata per 1908–1940): scansioni dal microfilm della Gazzetta,
+  €1,50 a JPG 300 dpi (€16 TIFF 400 dpi), uso privato non commerciale. Richiesta a b-brai.riproduzioni@cultura.gov.it,
+  pagamento su pagonline.cultura.gov.it ("Pinacoteca di Brera" > "Servizi Braidense"); lavorano la settimana dopo il pagamento.
+  Date da chiedere: 11/3/1908 (la Gazzetta nel 1908 usciva lun-mer-ven; fondazione lunedì 9/3) + 13/3/1908 di riserva,
+  25/4/1910, 21/6/1920, 30/6/1930, 25/4/1938, 3/6/1940. Costo stimato €10–20. Bianco e nero (microfilm).
+- **Corriere della Sera, Archivio storico** (Naviga+ €9,99/mese): tutte le edizioni dal 1876, consultazione online; download non verificato.
+- **Gazzetta Digital Edition** (€7,99/mese): da verificare se l'archivio arriva al 2009 e permette di esportare le pagine.
+- **Archivio La Stampa**: gratuito, ma irraggiungibile dai server cloud; provare da una connessione di casa in Italia.
+- **Giornali originali** (eBay, in-vendita.it): nessun annuncio trovato per le nostre date, rischio ristampe.
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
-- [ ] Valutare le opzioni a pagamento per migliorare 1908–1940 e le Gazzette 2009–2021 (in corso di ricerca)
+- [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)
+- [ ] Provare un mese di Gazzetta Digital Edition per le Gazzette 2009–2021 in alta risoluzione
 - [ ] Scelta tipografia/formato premium e ordine entro il 5 dicembre

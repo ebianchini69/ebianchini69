@@ -50,7 +50,7 @@ module.exports = {
           testo:
             "Al ristorante L'Orologio, in centro a Milano, un gruppo di soci in dissenso con il Milan fonda una nuova squadra. Il nome è una dichiarazione d'intenti: Internazionale, aperta ai giocatori stranieri. I colori sono il nero e l'azzurro.",
           tabellino: "Milano, ristorante L'Orologio",
-          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 10 marzo 1908",
+          giornale: "Pagina ricostruita in stile d'epoca · La Gazzetta dello Sport, 11 marzo 1908",
         },
         {
           id: "1910-primo-scudetto",

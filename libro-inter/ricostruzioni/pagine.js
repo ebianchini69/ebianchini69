@@ -7,15 +7,15 @@
 module.exports = [
   {
     id: "1908-fondazione",
-    data: "1908-03-10",
+    data: "1908-03-11",
     epoca: "liberty",
     occhiello: "Cronaca sportiva milanese",
     titolo: "Una nuova Società di foot-ball",
     sottotitolo:
-      "Iersera all'«Orologio» è sorto il «Foot-Ball Club Internazionale» — Quarantaquattro soci fondatori — Porte aperte ai giuocatori stranieri",
+      "Lunedì sera all'«Orologio» è sorto il «Foot-Ball Club Internazionale» — Quarantaquattro soci fondatori — Porte aperte ai giuocatori stranieri",
     foto: { file: "1908-firme.png", didascalia: "Il verbale della riunione con le firme dei soci fondatori." },
     articolo: [
-      "Una schiera di giovani sportsmen milanesi, quasi tutti fino a ieri iscritti al Milan Cricket and Foot-Ball Club, si è riunita iersera nelle sale del ristorante «Orologio», in Piazza del Duomo, per dar vita a una nuova società dedicata al giuoco del foot-ball. Le discussioni si sono protratte fino a tarda ora; pochi minuti prima della mezzanotte, il nuovo sodalizio era costituito.",
+      "Una schiera di giovani sportsmen milanesi, quasi tutti fino a ieri iscritti al Milan Cricket and Foot-Ball Club, si è riunita lunedì sera, 9 marzo, nelle sale del ristorante «Orologio», in Piazza del Duomo, per dar vita a una nuova società dedicata al giuoco del foot-ball. Le discussioni si sono protratte fino a tarda ora; pochi minuti prima della mezzanotte, il nuovo sodalizio era costituito.",
       "La ragione della separazione è nota a quanti seguono le vicende del nostro foot-ball. Il Milan, piegandosi alle nuove disposizioni federali, ha rinunciato ad accogliere nelle proprie file altri giuocatori stranieri. I dissidenti, che sono quarantaquattro, non hanno inteso seguirlo su questa via, e hanno voluto che il nome stesso della nuova società fosse un programma: Internazionale.",
       "I colori sociali saranno il nero e l'azzurro. Uno dei fondatori, il giovane pittore Giorgio Muggiani, li ha così salutati: «Questa notte splendida darà i colori al nostro stemma: il nero e l'azzurro sul fondo d'oro delle stelle. Si chiamerà Internazionale, perché noi siamo fratelli del mondo».",
       "Il verbale della seduta è stato steso seduta stante e firmato da tutti i presenti. La nuova società si propone di prendere parte già dalla prossima stagione al campionato federale. Agli amici dell'Internazionale i nostri auguri più cordiali: il foot-ball milanese avrà da oggi una bandiera in più.",

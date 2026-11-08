@@ -51,6 +51,20 @@ sono su Google Drive.
 - **Archivio La Stampa**: gratuito, ma irraggiungibile dai server cloud; provare da una connessione di casa in Italia.
 - **Giornali originali** (eBay, in-vendita.it): nessun annuncio trovato per le nostre date, rischio ristampe.
 
+## Rilegatura (8/11/2026)
+Quattro proposte in `rilegatura/` (mockup + tavola A3 `proposte-rilegatura.pdf`): A Nerazzurro, B La bacheca
+(palmarès in oro: 21 scudetti, 3 Coppe dei Campioni, 3 UEFA, 3 mondiali, 10 Coppe Italia), C Prima pagina, D Due stelle.
+Raccomandazione: B + taglio blu e nastri da D + risguardi Gazzetta del Triplete da C. Senza stemma ufficiale (marchio).
+
+## Legatori e stampatori a Milano (ricerca 8/11/2026)
+1. **Legatoria Conti Borbone** (dal 1873, Bottega Storica, Ambrogino d'oro) — Via Giulio Romano 29 / ingresso Via Gaetana Agnesi 18,
+   tel. 02 8645 0090, info@contiborbone.com. Prima scelta. Bozza email in Gmail.
+2. **Legatoria Borghi** (stampa + rilegatura, pezzi singoli) — Via Gian Giacomo Mora 15, tel. 02 837 5649,
+   info@legatoriaborghimilano.it. Alternativa "tutto in uno". Bozza email in Gmail.
+3. **Legatoria d'Arte Giovanni Còdina** (dal 1951, altissimo livello) — Via Chianciano 4, tel. 02 645 3477: telefonare per verificare che sia attiva.
+Stampatori fine art: **Fine M-art** (Via A. Buschi 9, 02 8969 5203, stampa@finemart.it), **Studio Fahrenheit** (Viale A. Doria 33, 02 2049 671).
+Nota tecnica: far scegliere al legatore carta (fronte/retro) e cucitura prima di stampare; file allo stampatore entro il 20–25/11.
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
 - [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)

@@ -65,6 +65,14 @@ Raccomandazione: B + taglio blu e nastri da D + risguardi Gazzetta del Triplete 
 Stampatori fine art: **Fine M-art** (Via A. Buschi 9, 02 8969 5203, stampa@finemart.it), **Studio Fahrenheit** (Viale A. Doria 33, 02 2049 671).
 Nota tecnica: far scegliere al legatore carta (fronte/retro) e cucitura prima di stampare; file allo stampatore entro il 20–25/11.
 
+## Aggiornamento 9/11/2026
+- Nuovo vincolo: consegna entro **3–4 dicembre** (dall'8/12 Elena non è disponibile). Brief inviato: mezza tela,
+  piatti neri, dorso tela azzurra (#0068A8 / ~Pantone 3015 C), oro a caldo, 52 pagine, PDF pronti entro il 20/11.
+- **Conti Borbone: ha rifiutato** (non riesce a consegnare entro il 4/12).
+- **Legatoria Borghi**: info@legatoriaborghimilano.it non esiste (email respinta) → bozza reinviata a legatoriaborghimilano@gmail.com.
+- **Morganti** (via Lanzone 1, 02 8645 2956): bozza pronta a morganti@morgantimilano.it.
+- Braidense: richiesta inviata l'8/11, in attesa.
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
 - [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)

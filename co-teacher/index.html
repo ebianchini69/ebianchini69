@@ -284,6 +284,17 @@ const DEFAULT_CFG = {
 const LESSON = window.ADA_LESSON || null;
 if (LESSON) Object.assign(DEFAULT_CFG, LESSON.cfg);
 let cfg = Object.assign({}, DEFAULT_CFG, LS.get('cfg', {}));
+// Se nel browser c'è una versione vecchia dello stesso pacchetto lezione, aggiorna i contenuti
+// (materiale, regole, stile) e lascia com'erano chiave, modello, voce e tetto di spesa.
+let lessonUpdated = false;
+if (LESSON){
+  const stored = LS.get('cfg', null);
+  const sameLesson = !stored || stored.lessonId === LESSON.id || (stored.material || '').includes('OFFICINE RIVA');
+  if (sameLesson && stored && stored.lessonVersion !== LESSON.version){
+    Object.assign(cfg, LESSON.cfg); lessonUpdated = true;
+  }
+  if (sameLesson){ cfg.lessonId = LESSON.id; cfg.lessonVersion = LESSON.version; LS.set('cfg', cfg); }
+}
 
 /* ---------------- memoria ---------------- */
 let mem = Object.assign({ students:{}, notes:[], queue:[], history:[], spent:0 }, LS.get('mem', {}));
@@ -330,11 +341,11 @@ $('#cfgFile').addEventListener('change', async e => {
 });
 $('#btnLesson').onclick = () => {
   if (!LESSON) return;
-  Object.assign(cfg, LESSON.cfg); LS.set('cfg', cfg); loadForm(); applyBrand(); lessonInfo();
-  sys(`Caricato il pacchetto «${LESSON.label}».`);
+  Object.assign(cfg, LESSON.cfg, { lessonId: LESSON.id, lessonVersion: LESSON.version }); LS.set('cfg', cfg); loadForm(); applyBrand(); lessonInfo();
+  sys(`Caricato il pacchetto «${LESSON.label}», versione ${LESSON.version || ''}.`);
 };
 function lessonInfo(){
-  $('#lessonInfo').textContent = LESSON ? `Disponibile: ${LESSON.label}. ${cfg.material === LESSON.cfg.material ? 'In uso.' : 'Non in uso (materiale diverso).'}` : 'Nessun pacchetto trovato.';
+  $('#lessonInfo').textContent = LESSON ? `${LESSON.label}, versione ${LESSON.version || '—'}. ${cfg.material === LESSON.cfg.material ? 'In uso.' : 'Non in uso: hai un materiale diverso. Premi il pulsante per caricarlo.'}` : 'Nessun pacchetto trovato.';
 }
 $('#btnSave').onclick = () => { readForm(); client = null; refreshBrain(); show('live'); sys('Configurazione salvata.'); };
 $('#btnNewLesson').onclick = () => { mem.history = []; mem.queue = []; mem.notes = []; saveMem(); $('#log').innerHTML=''; renderSide(); sys('Nuova lezione: chat, appunti e coda azzerati. Gli studenti restano in memoria.'); };
@@ -764,6 +775,7 @@ loadForm(); applyBrand(); renderSide(); refreshBrain(); lessonInfo();
 for (const h of mem.history.slice(-10)){
   if (h.role === 'user') addMsg('u', h.content); else { const o = safeParse(h.content); addMsg('a', o?.risposta ?? h.content, o?.tono); }
 }
+if (lessonUpdated) sys(`Pacchetto lezione aggiornato alla versione ${LESSON.version}.`);
 if (!cfg.key) sys('Benvenuta! Vai su «Preparazione» per caricare il materiale della lezione e collegare Claude.');
 
 // Se la pagina gira dentro Claude (artifact), usa Claude senza chiave API

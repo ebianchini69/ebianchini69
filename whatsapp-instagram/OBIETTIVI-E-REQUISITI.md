@@ -38,3 +38,19 @@ Per ogni post: una prima scrematura (tenere, scartare, approfondire), anche asco
 1. Dove vive la board: archivio locale sul Mac, oppure Notion con vista board (già collegato), alimentato dall'archivio locale.
 2. "Misure" del fitness: metriche del singolo allenamento (come sopra) o anche misure personali da tracciare.
 3. Esclusione delle posizioni del parcheggio da "memo": da confermare.
+
+## Instagram: idea parcheggiata (14/11/2026)
+
+Decisione di Elena: parcheggiata perché troppo complessa rispetto al valore attuale. Strade valutate, per riprenderle:
+
+| Strada | Esito |
+|---|---|
+| API ufficiale | Non esiste per i salvati di un account personale |
+| Portabilità DMA / export Meta | Lenta (giorni), solo link, niente audio o video |
+| Librerie con login (instagrapi e simili) | Escluse: credenziali in file, rischio per l'account |
+| Chrome | Escluso da Elena |
+| Duplicazione iPhone dal Mac | Non disponibile nell'UE |
+| iPhone comandato via cavo (Xcode + WebDriverAgent, cattura audio USB) | Fattibile in teoria, setup pesante, non provata |
+| Sessione assistita via AirPlay | Semplice ma manuale |
+
+Da riconsiderare se Apple attiva la Duplicazione iPhone nell'UE o se Meta apre la portabilità ai privati.

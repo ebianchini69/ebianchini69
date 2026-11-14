@@ -3,6 +3,15 @@
 Stato: proposta del 14/11/2026. Nessun comando è stato eseguito sul Mac di Elena né sugli account.
 Base: `adelaidasofia/whatsapp-mcp` al commit `3fa40384e352fbffe774de1569ea155101b93d98`, letto (in sola lettura) per scrivere questo piano.
 
+## Decisioni di Elena
+
+| Data | Punto | Decisione |
+|---|---|---|
+| 14/11/2026 | G, salvataggio audio dei vocali | Spento (`WHATSAPP_KEEP_VOICE_AUDIO=false`) |
+| — | D, token nel Portachiavi invece del `.env` | In sospeso |
+| — | Elenco chat per la prima prova | In sospeso |
+| — | Via all'esecuzione dei comandi e modalità | In sospeso |
+
 ## 0. Cosa ho trovato nel codice che cambia il piano
 
 | # | Fatto (verificato nel commit) | Conseguenza |
@@ -13,7 +22,7 @@ Base: `adelaidasofia/whatsapp-mcp` al commit `3fa40384e352fbffe774de1569ea155101
 | D | Il server MCP (Python) **non legge il `.env`**: token e file `allow` gli arrivano solo come variabili d'ambiente. Con `claude mcp add --env` il token finirebbe in chiaro in `~/.claude.json`. | Propongo di tenere il token nel Portachiavi e di passarlo con due piccoli script di avvio (sezione 3). Nel `.env` il token resta vuoto. È una deviazione dalla tabella dell'handover: va approvata. |
 | E | Il file `allow` filtra solo ciò che vede Claude. Il bridge salva comunque in locale (cifrati) i messaggi in arrivo da **tutte** le chat. | Il perimetro limita la lettura, non la raccolta. Da sapere prima di partire. |
 | F | Il file `allow` vuole identificativi WhatsApp (JID), non nomi. Se è illeggibile o malformato non mostra nulla (fallisce in chiusura, bene). | Servono i numeri dei contatti scelti; per i gruppi, un'unica ricerca locale sul nome (sezione 5). |
-| G | `WHATSAPP_KEEP_VOICE_AUDIO` è `true` di default: salva l'audio dei vocali su disco **non cifrato**. Non è nella tabella dell'handover. | Propongo `false`. |
+| G | `WHATSAPP_KEEP_VOICE_AUDIO` è `true` di default: salva l'audio dei vocali su disco **non cifrato**. Non è nella tabella dell'handover. | `false`: **approvato da Elena il 14/11/2026**. |
 | H | Il collegamento con QR, secondo `SETUP.md`, va fatto a mano nel proprio terminale (il QR scade ogni ~20 s). | Unica eccezione alla regola 4: circa 30 secondi di terminale in primo piano, una volta sola. Poi tutto in background. Alternativa: codice di 8 caratteri (`--pair-phone`), stesso vincolo. |
 | I | Dopo una disconnessione forzata il bridge torna da solo in modalità collegamento (mostra un nuovo QR). Non si ricollega senza una scansione. | Va bene, ma diventa un segnale di stop (sezione 7): nessuno scansiona senza il via di Elena. |
 | J | Il bridge rifiuta all'avvio qualsiasi indirizzo diverso da loopback; senza token l'API risponde a qualunque processo del Mac. | `127.0.0.1` è garantito dal codice; il token è indispensabile. |
@@ -101,7 +110,7 @@ cp .env.example .env   # poi si impostano i valori sotto
 | `WHATSAPP_WHISPER_BACKEND` | `off` |
 | `WHATSAPP_WEBHOOK_URL` | vuoto |
 | `WHATSAPP_ALLOWED_ORIGINS` | vuoto |
-| `WHATSAPP_KEEP_VOICE_AUDIO` | `false` (in aggiunta, vedi G) |
+| `WHATSAPP_KEEP_VOICE_AUDIO` | `false` (in aggiunta, vedi G; approvato) |
 | `WHATSAPP_VAULT_CRM_PATH` | vuoto |
 | `WHATSAPP_BACKUP_INTERVAL_HOURS` | `0` (già default) |
 

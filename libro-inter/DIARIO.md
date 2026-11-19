@@ -82,6 +82,15 @@ Nota tecnica: far scegliere al legatore carta (fronte/retro) e cucitura prima di
 - **Fine M-art**: non disponibile (solo inkjet su carte fine art). **Conti Borbone**: non disponibile.
 - **Braidense**: scansioni inviate il 10/11 via APE Cargo, link scaduto il 15/11 → bozza di richiesta di reinvio in Gmail.
 
+## ATTENZIONE – dove sta il lavoro vero (19/11/2026)
+Dal 9 al 13/11 il libro è andato avanti nella sessione cloud **«Libro inter»** (versione per Roberto, v13, sorgenti su Drive).
+Lì: Gazzette originali della Braidense 1910–1940 già nel libro, verbale 1908, trofei, 5 maggio 2002, finale 2022,
+dedica e pagine personali; tolti tutti i testi scritti da Claude; titolo «Inter: il giorno dopo». Libro all'85%.
+Mancano: prime pagine Gazzetta del 12/05/2022, 13/01/2022, 19/05/1939, 21/05/1982 + 6 prime pagine 2009–2021 in alta
+risoluzione (Elena le scarica dal suo abbonamento digitale e le carica su Drive con la data nel nome); poi PDF definitivo.
+Le immagini della v13 non risultano su Drive: chiesto alla sessione «Libro inter» di caricarle (19/11).
+Visita Morganti in agenda: venerdì 20/11 ore 10:00 (orario da confermare al telefono).
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
 - [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)

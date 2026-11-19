@@ -91,6 +91,13 @@ risoluzione (Elena le scarica dal suo abbonamento digitale e le carica su Drive 
 Le immagini della v13 non risultano su Drive: chiesto alla sessione «Libro inter» di caricarle (19/11).
 Visita Morganti in agenda: venerdì 20/11 ore 10:00 (orario da confermare al telefono).
 
+## 19/11/2026 – pomeriggio
+- Gazzetta Digital Edition: dà solo gli ultimi 14 giorni → inutile per le date storiche (disdire se attivata).
+- Braidense: richieste 10 prime pagine (19/5/1939, 21/5/1982, 17/5/2009, 6/5/2010, 17/5/2010, 23/5/2010, 19/12/2010,
+  3/5/2021, 13/1/2022, 12/5/2022); pagati 5 € forfait via pagoPA, ricevuta inviata il 19/11. In attesa del link (scade in 5 giorni).
+- Verbale 1908 in alta risoluzione: bozza di richiesta a slo@inter.it (alternative: segreteriaccic@inter.it, tour@sansirostadium.com).
+- Immagini v13 salvate su Drive: cartella "v13 – immagini e PDF".
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
 - [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)

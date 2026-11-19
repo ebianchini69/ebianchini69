@@ -73,6 +73,15 @@ Nota tecnica: far scegliere al legatore carta (fronte/retro) e cucitura prima di
 - **Morganti** (via Lanzone 1, 02 8645 2956): bozza pronta a morganti@morgantimilano.it.
 - Braidense: richiesta inviata l'8/11, in attesa.
 
+## Stato al 19/11/2026 (dalla posta)
+- Nuova scadenza: ritiro entro **21–22 dicembre** (da persona di fiducia). Interni ora **66 pagine** fronte/retro (impaginato di prova inviato da Elena).
+- **Borghi** (Elvio Ravasio): consegna metà dicembre; rilegatura €50, oro a caldo €20 piatto + €20 dorso (solo Helvetica/Times senza cliché),
+  stampa €0,90 a facciata; taglio blu impossibile; carta da scegliere in negozio.
+- **Morganti** (Valeria Morganti): 5–7 giorni lavorativi dal visto si stampi; cliché possibile (costo da quotare); tela "simile" all'azzurro;
+  Elena ha chiesto preventivo, costo cliché, formato file, prova di stampa e visita venerdì 20/11 (orario non ancora confermato).
+- **Fine M-art**: non disponibile (solo inkjet su carte fine art). **Conti Borbone**: non disponibile.
+- **Braidense**: scansioni inviate il 10/11 via APE Cargo, link scaduto il 15/11 → bozza di richiesta di reinvio in Gmail.
+
 ## Prossimi passi
 - [ ] Nome, dedica, firma, pagine personali
 - [ ] Richiesta alla Braidense per le pagine 1908–1940 (bozza email pronta in Gmail)
